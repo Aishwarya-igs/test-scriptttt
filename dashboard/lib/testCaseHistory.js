@@ -76,4 +76,19 @@ function getTestCaseHistory(key, opts = {}) {
   }));
 }
 
-module.exports = { findTestOccurrences, getTestCaseHistory };
+/**
+ * The most recent still-open Jira issue already filed for this exact test
+ * case in any other run, if one exists — what "Report bug" checks before
+ * creating a new issue, so a flaky test that fails across many runs gets
+ * one ticket, not one per run. Best-effort like everything else here: a
+ * scan failure just means no duplicate was found, not a crash.
+ */
+function findExistingJiraIssue(key, { excludeRunId } = {}) {
+  const occurrences = findTestOccurrences(key, { excludeRunId });
+  for (const { runId, test } of occurrences) {
+    if (test.jiraIssue) return { runId, jiraIssue: test.jiraIssue };
+  }
+  return null;
+}
+
+module.exports = { findTestOccurrences, getTestCaseHistory, findExistingJiraIssue };

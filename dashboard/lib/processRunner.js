@@ -32,7 +32,17 @@ function spawnPlaywrightJob({ env, project, grep, targets = [], extraEnv = {} })
   // Matches this repo's existing npm run test:* convention (see package.json)
   // so a dashboard-triggered run behaves the same as running it from the
   // CLI: a visible browser window per test, one at a time.
-  const args = ['cross-env', `TEST_ENV=${env}`, 'playwright', 'test', '--workers=1', '--headed'];
+  //
+  // TEST_ENV goes through spawn's own `env` option, not a `cross-env ...`
+  // prefix on the command line: cross-env is only a cross-platform shim for
+  // setting an env var in a raw shell command string, which was never
+  // actually needed here since spawn can set it directly. It also only
+  // exists as a devDependency of this repo — a client repo dashboard/ has
+  // been provisioned into (see admin-dashboard/lib/dashboardProvisioner.js)
+  // won't have it, and npx searching up the directory tree for it drags in
+  // a mismatched `playwright` resolution too, crashing with "did not expect
+  // test() to be called here".
+  const args = ['playwright', 'test', '--workers=1', '--headed'];
   if (project) args.push(`--project=${project}`);
   if (grep) args.push('--grep', grep);
   args.push(...targets);
@@ -45,7 +55,7 @@ function spawnPlaywrightJob({ env, project, grep, targets = [], extraEnv = {} })
   const child = spawn('npx', args, {
     cwd: REPO_ROOT,
     shell: true,
-    env: { ...process.env, ...extraEnv },
+    env: { ...process.env, ...extraEnv, TEST_ENV: env },
   });
   child.preExistingBrowserPids = preExistingBrowserPids;
   return child;
@@ -116,7 +126,9 @@ function sweepOrphanedBrowsers(preExistingPids) {
  * incremental accumulation.
  */
 function listTestCount({ env, grep, project }) {
-  const args = ['cross-env', `TEST_ENV=${env}`, 'playwright', 'test', '--list'];
+  // See spawnPlaywrightJob's comment on why TEST_ENV is set via `env` here,
+  // not a `cross-env` prefix.
+  const args = ['playwright', 'test', '--list'];
   if (project) args.push(`--project=${project}`);
   if (grep) args.push('--grep', grep);
   try {
@@ -126,6 +138,7 @@ function listTestCount({ env, grep, project }) {
       encoding: 'utf-8',
       timeout: 30000,
       windowsHide: true,
+      env: { ...process.env, TEST_ENV: env },
     });
     const match = out.match(/Total:\s*(\d+)\s*tests?/);
     return match ? Number(match[1]) : null;

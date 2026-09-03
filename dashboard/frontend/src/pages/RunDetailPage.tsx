@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { api } from '../api/client';
 import { useDashboardSocket } from '../api/useDashboardSocket';
@@ -11,7 +11,9 @@ import { CopyButton } from '../components/CopyButton';
 import { Confetti } from '../components/Confetti';
 import { ExportButtons } from '../components/ExportButtons';
 import { formatDuration, runDuration } from '../utils/runStats';
-import { exportRunCSV, exportRunPDF } from '../utils/export';
+import { exportRunCSV, exportRunPDF, buildRunPDFBase64 } from '../utils/export';
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ACTIVE_STATUSES = new Set(['queued', 'running']);
 const FAILURE_STATUSES = new Set(['failed', 'timedOut', 'interrupted']);
@@ -44,6 +46,49 @@ export function RunDetailPage() {
   const [pendingRerunIds, setPendingRerunIds] = useState<Set<string>>(new Set());
   const prevStatusRef = useRef<string | null>(null);
   const navigate = useNavigate();
+
+  // Set by admin-dashboard for a per-client instance — included in the PDF
+  // header so a downloaded report is unambiguous about which client it's
+  // from, same reasoning as the sidebar title (see App.tsx).
+  const [clientName, setClientName] = useState<string | null>(null);
+  useEffect(() => {
+    api.getClientInfo().then((res) => setClientName(res.name)).catch(() => setClientName(null));
+  }, []);
+  const chartsRef = useRef<HTMLDivElement>(null);
+  const [emailFormOpen, setEmailFormOpen] = useState(false);
+  const [emailTo, setEmailTo] = useState('');
+  const [emailBusy, setEmailBusy] = useState(false);
+  const [emailMessage, setEmailMessage] = useState<{ text: string; isError: boolean } | null>(null);
+
+  function toggleEmailForm() {
+    setEmailMessage(null);
+    setEmailFormOpen((open) => !open);
+  }
+
+  async function handleSendEmail(e: FormEvent) {
+    e.preventDefault();
+    if (!runId || !run) return;
+    const to = emailTo.trim();
+    if (!EMAIL_RE.test(to)) {
+      setEmailMessage({ text: `"${to}" doesn't look like a valid email address.`, isError: true });
+      return;
+    }
+    setEmailBusy(true);
+    setEmailMessage(null);
+    try {
+      // Same report the PDF button downloads (client name + charts +
+      // results table), attached instead of saved to disk.
+      const { base64, filename } = await buildRunPDFBase64(run, { clientName, chartsEl: chartsRef.current });
+      const res = await api.emailRun(runId, { to, pdfBase64: base64, filename });
+      setEmailMessage({ text: `Sent to ${res.recipients.join(', ')} with ${filename} attached`, isError: false });
+      setEmailFormOpen(false);
+      setEmailTo('');
+    } catch (err) {
+      setEmailMessage({ text: err instanceof Error ? err.message : 'Could not send the email', isError: true });
+    } finally {
+      setEmailBusy(false);
+    }
+  }
 
   const refetch = useCallback(() => {
     if (!runId) return;
@@ -318,7 +363,12 @@ export function RunDetailPage() {
           </div>
         </div>
         <div className="run-detail-actions">
-          <ExportButtons onExportPDF={() => exportRunPDF(run)} onExportCSV={() => exportRunCSV(run)} />
+          <ExportButtons
+            onExportPDF={() => exportRunPDF(run, { clientName, chartsEl: chartsRef.current })}
+            onExportCSV={() => exportRunCSV(run)}
+            onEmail={toggleEmailForm}
+            emailBusy={emailBusy}
+          />
           {isActive && (
             <button className="danger-button" onClick={handleStop} disabled={busy}>
               Stop run
@@ -330,6 +380,28 @@ export function RunDetailPage() {
             </button>
           )}
         </div>
+        {emailFormOpen && (
+          <form className="export-email-form" onSubmit={handleSendEmail}>
+            <input
+              type="email"
+              required
+              placeholder="recipient@example.com"
+              value={emailTo}
+              onChange={(e) => setEmailTo(e.target.value)}
+              disabled={emailBusy}
+              autoFocus
+            />
+            <button type="submit" className="primary-button" disabled={emailBusy}>
+              {emailBusy ? 'Sending…' : 'Send with PDF attached'}
+            </button>
+            <button type="button" className="link-button" onClick={toggleEmailForm} disabled={emailBusy}>
+              Cancel
+            </button>
+          </form>
+        )}
+        {emailMessage && (
+          <p className={`muted export-email-message${emailMessage.isError ? ' error' : ''}`}>{emailMessage.text}</p>
+        )}
       </div>
 
       {!isActive && <RunSummaryCard run={run} onUpdated={refetch} />}
@@ -360,11 +432,14 @@ export function RunDetailPage() {
         </div>
       )}
 
-      <RunSummaryCharts stats={run.stats} tests={tests} />
+      <div ref={chartsRef}>
+        <RunSummaryCharts stats={run.stats} tests={tests} />
+      </div>
 
       <TestTable
         tests={tests}
         runId={run.runId}
+        clientName={clientName}
         onRerunTest={(testId) => handleRerun('test', testId)}
         onRerunFile={(file) => handleRerun('file', file)}
         onRerunProject={(project) => handleRerun('project', project)}

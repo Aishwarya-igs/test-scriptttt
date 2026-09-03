@@ -34,7 +34,10 @@ const HOST = '127.0.0.1'; // Localhost-only: this server can spawn arbitrary Pla
 // test runs on request, so it must never be exposed on the network by default.
 
 const app = express();
-app.use(express.json());
+// Default 100kb is too small for the Email button's request body — it
+// carries the whole PDF report (including a rasterized chart screenshot) as
+// base64 so it can be attached server-side via SendGrid.
+app.use(express.json({ limit: '20mb' }));
 
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server, path: '/ws' });

@@ -1,0 +1,775 @@
+:root {
+  --bg: #f4f5f9;
+  --surface: #ffffff;
+  --border: #e5e6ec;
+  --text: #14141a;
+  --text-secondary: #6c6d78;
+  --accent: #4f5fed;
+  --accent-hover: #3d4bd4;
+  --accent-soft: #eef0fe;
+  --success: #1f9d6f;
+  --danger: #d1453b;
+  --warning: #b8790a;
+  --shadow-sm: 0 1px 2px rgba(20, 20, 30, 0.04), 0 1px 1px rgba(20, 20, 30, 0.03);
+  --shadow-md: 0 12px 28px -12px rgba(20, 20, 40, 0.16);
+  --shadow-lg: 0 24px 48px -16px rgba(20, 20, 40, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121218;
+    --surface: #1c1c24;
+    --border: #2d2d38;
+    --text: #f2f2f5;
+    --text-secondary: #9c9ca8;
+    --accent: #7c88ff;
+    --accent-hover: #929cff;
+    --accent-soft: #23253f;
+    --success: #35c48e;
+    --danger: #f0776d;
+    --warning: #e0a63a;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 12px 28px -12px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 24px 48px -16px rgba(0, 0, 0, 0.6);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 100% -10%, var(--accent-soft), transparent),
+    var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.muted {
+  color: var(--text-secondary);
+}
+
+.page-loading,
+.empty-state {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+}
+
+button {
+  font: inherit;
+}
+
+.primary-button {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 8px 16px -8px color-mix(in srgb, var(--accent) 70%, transparent);
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+.primary-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 20px -8px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+.primary-button:active {
+  transform: translateY(0);
+}
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.secondary-button {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.secondary-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.secondary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.secondary-button-danger {
+  background: color-mix(in srgb, var(--danger) 10%, var(--surface));
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 35%, var(--border));
+}
+.secondary-button-danger:hover {
+  background: var(--danger);
+  color: #fff;
+  border-color: var(--danger);
+}
+.secondary-button-accent {
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+}
+.secondary-button-accent:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.secondary-button-warning {
+  background: color-mix(in srgb, var(--warning) 10%, var(--surface));
+  color: var(--warning);
+  border-color: color-mix(in srgb, var(--warning) 35%, var(--border));
+}
+.secondary-button-warning:hover {
+  background: var(--warning);
+  color: #fff;
+  border-color: var(--warning);
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+.link-button:hover {
+  text-decoration: underline;
+}
+.form-error,
+.login-error {
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Login */
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.login-back-link {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.login-back-link:hover {
+  text-decoration: underline;
+}
+
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-lg);
+  padding: 44px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.login-eyebrow {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.login-card h1 {
+  margin: -4px 0 8px;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+}
+.login-input {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.login-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.login-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.login-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-top: -4px;
+}
+.login-remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.login-remember input {
+  accent-color: var(--accent);
+  width: 15px;
+  height: 15px;
+}
+.login-forgot-note {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: -6px 0 0;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.login-forgot-note code {
+  font-size: 11px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.login-submit {
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  margin-top: 4px;
+}
+.login-switch {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Overview */
+.overview-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.overview-header h1 {
+  margin: 0 0 4px;
+  font-size: 30px;
+  letter-spacing: -0.01em;
+}
+.overview-subtitle {
+  margin: 6px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  max-width: 560px;
+  background: linear-gradient(100deg, var(--accent), var(--accent-hover));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.overview-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Consolidated rollup row */
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.summary-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  padding: 20px 22px;
+}
+.summary-tile-accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border-color: transparent;
+}
+/* Pass rate reads its health at a glance instead of always being the same
+   flat brand blue regardless of whether the number is good or bad. */
+.summary-tile-accent-success {
+  background: linear-gradient(135deg, var(--success), color-mix(in srgb, var(--success) 65%, black));
+}
+.summary-tile-accent-warning {
+  background: linear-gradient(135deg, var(--warning), color-mix(in srgb, var(--warning) 65%, black));
+}
+.summary-tile-accent-danger {
+  background: linear-gradient(135deg, var(--danger), color-mix(in srgb, var(--danger) 65%, black));
+}
+.summary-tile-accent .summary-tile-label,
+.summary-tile-accent .summary-tile-sub {
+  color: rgba(255, 255, 255, 0.75);
+}
+.summary-tile-accent .summary-tile-value {
+  color: #fff;
+}
+.summary-tile-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+.summary-tile-value {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-top: 6px;
+  color: var(--text);
+}
+.summary-tile-value-small {
+  font-size: 18px;
+}
+.summary-tile-sub {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.onboard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.onboard-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.onboard-form input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 400;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.onboard-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.client-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* Every card gets stretched to the tallest card in its row (the CSS grid
+     default), so cards with less content don't end up a different height
+     than one another. */
+  align-items: stretch;
+  gap: 18px;
+}
+
+.client-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.client-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.client-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+.client-card-header h3 {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  /* Without this, a single long word (a one-word name like "Netflix" or
+     "webdriverIO", or the last word before a line break) has nothing to
+     wrap at once its container is narrower than the word itself — it
+     overflows straight past the edge and visually overlaps the action
+     buttons next to it instead of breaking onto the next line. */
+  overflow-wrap: break-word;
+}
+.client-card-header > div:first-child {
+  /* Reserves the same header height whether or not a client has a
+     description, so every card's path/stats/footer line up at the same
+     row regardless of content differences between clients. */
+  min-height: 40px;
+  /* Flex items default to min-width:auto, which floors their shrink at the
+     title's own unbroken text width — overriding to 0 is what actually lets
+     a long name wrap instead of pushing the (now flex-shrink:0) action
+     buttons off their single-line width. */
+  min-width: 0;
+}
+.client-card-header p.muted {
+  margin: 4px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.client-card-path {
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 5px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: ui-monospace, Consolas, monospace;
+}
+.client-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.stat-tile {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.stat-tile-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+}
+.stat-tile-value {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.stat-tile-value-small {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Status color coding — used for both a client card/detail tile's "Last
+   status" value and the recent-runs table's Status column, so passed/failed
+   reads instantly instead of everything being the same flat black text. */
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+  line-height: 1.4;
+}
+.status-badge-passed {
+  background: color-mix(in srgb, var(--success) 16%, transparent);
+  color: var(--success);
+}
+.status-badge-failed {
+  background: color-mix(in srgb, var(--danger) 16%, transparent);
+  color: var(--danger);
+}
+.status-badge-neutral {
+  background: color-mix(in srgb, var(--text-secondary) 16%, transparent);
+  color: var(--text-secondary);
+}
+.stat-count-passed {
+  color: var(--success);
+  font-weight: 700;
+}
+.stat-count-failed {
+  color: var(--danger);
+  font-weight: 700;
+}
+.stat-count-skipped {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+.text-success {
+  color: var(--success);
+}
+.text-warning {
+  color: var(--warning);
+}
+.text-danger {
+  color: var(--danger);
+}
+.client-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Pins the whole footer (View details + Open Automation Dashboard) to the
+     bottom of the card regardless of how much content is above it, so both
+     line up across a row of cards with different amounts of content (e.g. a
+     card with real stats vs. one showing "no data yet") instead of floating
+     right after their own text. */
+  margin-top: auto;
+}
+.client-card-launch {
+  text-align: center;
+}
+
+.client-card-header-actions {
+  display: flex;
+  gap: 8px;
+  /* Never shrunk to make room for a long client name — without this, the
+     buttons (which can't wrap, see .secondary-button) got squeezed instead,
+     and a long name like "AMAZON PRIME" would compress them until the flex
+     box itself shrank below their content width, clipping the text. The
+     name yields instead: it already has its own line-clamp/wrap handling
+     above, unlike a button label. */
+  flex-shrink: 0;
+}
+/* Smaller than the default .secondary-button (which is also used elsewhere,
+   e.g. the page header's Manage accounts/Sign out) — freeing up more of the
+   card header's width for the client name to fit on one line before it
+   needs to wrap at all. */
+.client-card-header-actions .secondary-button {
+  padding: 5px 9px;
+  font-size: 11px;
+}
+.client-card-edit-actions {
+  display: flex;
+  gap: 8px;
+}
+.client-card-details-link {
+  /* Styled to match the primary button below it (same padding/radius/width)
+     so the footer reads as one aligned pair of actions on every card,
+     instead of a small text link sitting above a full-size button. */
+  display: block;
+  text-align: center;
+  padding: 11px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.client-card-details-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+.stale-badge {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 999px;
+  padding: 2px 8px;
+  vertical-align: middle;
+}
+
+/* Manage accounts */
+.accounts-panel h3 {
+  margin: 0 0 12px;
+}
+.accounts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.accounts-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Client detail page */
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.detail-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 10px 10px;
+}
+.detail-table thead tr th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.detail-table thead tr th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.detail-table td {
+  padding: 8px 10px;
+  border-top: 1px solid var(--border);
+}
+.flaky-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.flaky-list li {
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.flaky-list-file {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 11px;
+}
+
+.onboard-form-note,
+.client-card-assigned-url {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: -4px 0 0;
+}
+
+/* Share access panel */
+.share-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+}
+.share-panel {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.share-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.share-panel-header h3 {
+  margin: 0;
+}
+.share-panel-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.share-panel-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.share-panel-row {
+  display: flex;
+  gap: 8px;
+}
+.share-panel-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  font-family: ui-monospace, Consolas, monospace;
+}
+.share-panel-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.share-panel-confirm {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+.share-panel-confirm-actions {
+  display: flex;
+  gap: 8px;
+}

@@ -251,6 +251,27 @@ export interface TestRecord {
   rca?: RcaResult | null;
   spotFix?: SpotFixProposal | null;
   lastRerun?: LastRerun | null;
+  jiraIssue?: JiraIssue | null;
+}
+
+export interface JiraIssue {
+  key: string;
+  url: string;
+  createdAt: string;
+}
+
+export interface JiraSettings {
+  baseUrl: string;
+  email: string;
+  projectKey: string;
+  issueType: string;
+  tokenConfigured: boolean;
+  tokenPreview: string | null;
+}
+
+export interface JiraIssueTypeOption {
+  name: string;
+  description: string;
 }
 
 export interface JobRecord {

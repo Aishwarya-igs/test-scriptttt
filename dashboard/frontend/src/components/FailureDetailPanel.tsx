@@ -4,6 +4,7 @@ import type { FailureCategory, RcaResult, TestRecord } from '../api/types';
 import { CopyButton } from './CopyButton';
 import { SpotFixPanel } from './SpotFixPanel';
 import { TestCaseHistoryPanel } from './TestCaseHistoryPanel';
+import { ReportBugPanel } from './ReportBugPanel';
 import { stripAnsi } from '../utils/ansi';
 
 function attachmentsByName(test: TestRecord, name: string) {
@@ -38,10 +39,12 @@ function RcaSourceBadge({ rca }: { rca: RcaResult }) {
 export function FailureDetailPanel({
   test,
   runId,
+  clientName,
   onRerunTest,
 }: {
   test: TestRecord;
   runId: string;
+  clientName?: string | null;
   onRerunTest: (testId: string) => void;
 }) {
   const [rca, setRca] = useState<RcaResult | null | undefined>(test.rca);
@@ -78,6 +81,8 @@ export function FailureDetailPanel({
           {test.error.stack && <pre className="failure-error-stack">{stripAnsi(test.error.stack)}</pre>}
         </div>
       )}
+
+      <ReportBugPanel test={test} runId={runId} clientName={clientName} rca={rca} />
 
       <div className="rca-section">
         {!rca && (

@@ -3,6 +3,10 @@ const fs = require('fs');
 const { PROJECTS_MANIFEST } = require('../lib/paths');
 const { askAboutHistory } = require('../lib/chat');
 const { listPlatforms, isKnownPlatform } = require('../lib/platforms');
+const { switchBranch } = require('../lib/branchSwitcher');
+const { sendRunReportEmail } = require('../lib/notifyOnFailure');
+const { createJiraIssue, fetchIssueTypes } = require('../lib/jiraClient');
+const { getJiraConfig, getPublicJiraSettings, saveJiraSettings } = require('../lib/integrationSettings');
 
 // A chat message is free text a human typed, not an id used in a file path
 // or object-key lookup — the injection surface isSafeId guards against
@@ -86,6 +90,84 @@ module.exports = function createApiRouter(runManager, autoUpdater) {
     res.json(autoUpdater ? autoUpdater.getStatus() : { phase: 'idle' });
   });
 
+  // CLIENT_NAME is set by admin-dashboard's provisioner (lib/dashboardProvisioner.js)
+  // when it spawns a per-client copy of this app — null for the original,
+  // manually-started instance, so the sidebar falls back to its old generic title.
+  router.get('/client-info', (req, res) => {
+    res.json({ name: process.env.CLIENT_NAME || null });
+  });
+
+  // The sidebar's always-available "Report a bug" form — not tied to any
+  // particular run or test (that version lives at
+  // /runs/:runId/tests/:testId/report-bug below, and auto-fills the error/
+  // RCA/screenshot). This one is for anything else: a dashboard problem, a
+  // one-off issue someone wants to file without first finding a failed test.
+  router.post('/report-bug', async (req, res) => {
+    const { summary, notes, priority } = req.body || {};
+    if (!summary || !String(summary).trim()) return res.status(400).json({ error: 'A summary is required.' });
+    try {
+      const clientName = process.env.CLIENT_NAME || null;
+      const jiraIssue = await createJiraIssue({ clientName, summary, notes, priority });
+      res.json(jiraIssue);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  });
+
+  // This dashboard's own Jira connection — set once here instead of in a
+  // server .env file, so any client can connect their own Jira project
+  // without needing filesystem access. The token is never sent back to the
+  // browser in full, only a masked preview — see integrationSettings.js.
+  router.get('/settings/jira', (req, res) => {
+    res.json(getPublicJiraSettings());
+  });
+
+  router.post('/settings/jira', (req, res) => {
+    const { baseUrl, email, apiToken, projectKey, issueType } = req.body || {};
+    res.json(saveJiraSettings({ baseUrl, email, apiToken, projectKey, issueType }));
+  });
+
+  // Backs the Settings page's "Fetch issue types" button — the real issue
+  // types a project has, since a generic guess like "Bug" isn't always
+  // right (a JSM project, for instance, might only offer "Incident"). Takes
+  // credentials straight from the request body so it works on whatever's
+  // currently typed into the form, before Save has even been clicked.
+  router.post('/settings/jira/issue-types', async (req, res) => {
+    try {
+      // A blank token in the request means "use whatever's already saved"
+      // (same convention as Save) — otherwise re-checking types would force
+      // re-typing the token every time.
+      const stored = getJiraConfig();
+      const { baseUrl, email, apiToken, projectKey } = req.body || {};
+      const issueTypes = await fetchIssueTypes({
+        baseUrl: baseUrl || stored.baseUrl,
+        email: email || stored.email,
+        apiToken: apiToken || stored.apiToken,
+        projectKey: projectKey || stored.projectKey,
+      });
+      res.json({ issueTypes });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  });
+
+  // Points this dashboard's own repo checkout at a different branch's
+  // latest commit — see lib/branchSwitcher.js. Blocked while a run is
+  // active for the same reason a run can't be started against a moving
+  // target: the files a job is currently reading/executing would change
+  // out from under it mid-run.
+  router.post('/switch-branch', async (req, res) => {
+    if (runManager.activeJobs.size > 0) {
+      return res.status(409).json({ error: 'A run is currently active — stop it before switching branches' });
+    }
+    try {
+      const result = await switchBranch(req.body?.branch);
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  });
+
   router.get('/projects', (req, res) => {
     res.json(loadManifest());
   });
@@ -113,6 +195,33 @@ module.exports = function createApiRouter(runManager, autoUpdater) {
     const run = runManager.loadRun(req.params.runId);
     if (!run) return res.status(404).json({ error: 'Run not found' });
     res.json(run);
+  });
+
+  // Manual send for the "Email" button next to PDF/Excel on the run detail
+  // page — user-triggered, for any run status, and awaited so a
+  // misconfigured provider surfaces as a real error in the UI instead of
+  // silently doing nothing.
+  //
+  // Unlike the automatic failed-run notification (admins + this client's
+  // contact, no attachment), this one is explicitly addressed: `to` is
+  // whatever address the person typed into the Email form, and `pdfBase64`
+  // is the exact same report the PDF button would download — rendered
+  // client-side (it includes an html2canvas capture of the live charts,
+  // which only exists in the browser) and sent here as a SendGrid
+  // attachment rather than generated again on the server.
+  router.post('/runs/:runId/email', async (req, res) => {
+    const run = runManager.loadRun(req.params.runId);
+    if (!run) return res.status(404).json({ error: 'Run not found' });
+    const { to, pdfBase64, filename } = req.body || {};
+    try {
+      const { recipients } = await sendRunReportEmail(run, {
+        to,
+        attachment: pdfBase64 ? { base64: pdfBase64, filename } : undefined,
+      });
+      res.json({ sent: true, recipients });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
   });
 
   router.post('/runs', (req, res) => {
@@ -198,6 +307,20 @@ module.exports = function createApiRouter(runManager, autoUpdater) {
     try {
       const rca = await runManager.analyzeTest(req.params.runId, req.params.testId);
       res.json(rca);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  });
+
+  // The "Report Bug" button — files a real Jira issue for one failed test.
+  // summary/notes/priority are whatever the person editing the pre-filled
+  // form actually submits; jiraClient fills in the rest (client name, run,
+  // error, RCA) from the test record itself.
+  router.post('/runs/:runId/tests/:testId/report-bug', async (req, res) => {
+    try {
+      const { summary, notes, priority } = req.body || {};
+      const jiraIssue = await runManager.reportBug(req.params.runId, req.params.testId, { summary, notes, priority });
+      res.json(jiraIssue);
     } catch (err) {
       res.status(400).json({ error: err.message });
     }

@@ -12,8 +12,10 @@ const { recordBaseline, discardBaselineFromRun } = require('./spotfix/baselineSt
 const { platformOfRun, DEFAULT_PLATFORM_ID } = require('./platforms');
 const { syncRun, deleteRunFromIndex } = require('./db');
 const { generateRunSummary } = require('./runSummary');
+const { notifyOnFailure } = require('./notifyOnFailure');
+const { createJiraIssue, addJiraComment } = require('./jiraClient');
 const { testCaseKey } = require('./testCaseIdentity');
-const { getTestCaseHistory: loadTestCaseHistory } = require('./testCaseHistory');
+const { getTestCaseHistory: loadTestCaseHistory, findExistingJiraIssue } = require('./testCaseHistory');
 
 const FAILURE_STATUSES = new Set(['failed', 'timedOut', 'interrupted']);
 
@@ -666,6 +668,9 @@ class RunManager {
         // A stopped run's data is a partial/interrupted snapshot, not a
         // meaningful result to summarize — only passed/failed runs qualify.
         if (finalStatus === 'passed' || finalStatus === 'failed') this._generateRunSummaryAsync(run.runId);
+        // Fire-and-forget, same posture as the summary above: never let an
+        // email provider issue affect the run's own completion.
+        if (finalStatus === 'failed') notifyOnFailure(run).catch(() => {});
         return;
       }
 
@@ -729,7 +734,69 @@ class RunManager {
     delete test.spotFix;
     this._saveRun(run);
     this.broadcast({ type: 'run-event', runId, event: 'test-rca', payload: { testId, rca } });
+
+    // Keeps an already-filed issue current instead of going stale — the
+    // reporter shouldn't have to come back to the dashboard to learn a new
+    // diagnosis exists. Fire-and-forget: a Jira hiccup must never affect
+    // RCA itself.
+    if (test.jiraIssue) {
+      addJiraComment(test.jiraIssue.key, `New RCA analysis: ${rca.category ? `[${rca.category}] ` : ''}${rca.summary}`).catch((err) =>
+        console.error(`[dashboard] could not post RCA update to ${test.jiraIssue.key} (non-fatal):`, err.message)
+      );
+    }
     return rca;
+  }
+
+  /**
+   * Creates a real Jira issue from one failed test — the "Report Bug"
+   * button. Reuses an already-open issue for the same test CASE (matched by
+   * stable identity, not this run's id — see testCaseIdentity.js) rather
+   * than filing a second ticket for a flaky test that's failed before; a
+   * literal re-click on a test already reported in THIS run is refused
+   * outright, since that's just a duplicate click rather than a new
+   * occurrence.
+   */
+  async reportBug(runId, testId, { summary, notes, priority } = {}) {
+    const { run, test } = this._getTest(runId, testId);
+    if (test.jiraIssue) throw new Error(`This test was already reported as ${test.jiraIssue.key}.`);
+
+    // The ticket should never say "not analyzed yet" just because nobody
+    // happened to click Analyze first — run it now so Root cause/Suggested
+    // fix are always real generated content. Heuristic RCA has no external
+    // dependency and always returns something, so this only silently stays
+    // a placeholder if RCA itself genuinely throws (extremely rare).
+    if (!test.rca) {
+      try {
+        test.rca = await runRcaAnalysis(test, { excludeRunId: runId });
+        this._saveRun(run);
+      } catch (err) {
+        console.error(`[dashboard] could not auto-run RCA before filing a Jira issue for ${testId} (non-fatal):`, err.message);
+      }
+    }
+
+    const key = testCaseKey(test);
+    const existing = findExistingJiraIssue(key, { excludeRunId: runId });
+    let jiraIssue;
+    if (existing) {
+      jiraIssue = existing.jiraIssue;
+      // A new occurrence of an already-tracked bug — leave a trail on the
+      // existing ticket instead of staying silent about it happening again,
+      // including this run's own RCA (which may say something new/different
+      // than whatever's already in the ticket's original description).
+      const rcaLine = test.rca ? ` RCA: ${test.rca.category ? `[${test.rca.category}] ` : ''}${test.rca.summary}` : '';
+      addJiraComment(jiraIssue.key, `This test failed again in a later run (${runId}) — reusing this issue rather than filing a duplicate.${rcaLine}`).catch((err) =>
+        console.error(`[dashboard] could not post recurrence comment to ${jiraIssue.key} (non-fatal):`, err.message)
+      );
+    } else {
+      const clientName = process.env.CLIENT_NAME || null;
+      const dashboardUrl = `http://127.0.0.1:${this.port}/runs/${runId}`;
+      jiraIssue = await createJiraIssue({ test, run, clientName, dashboardUrl, summary, notes, priority });
+    }
+
+    test.jiraIssue = jiraIssue;
+    this._saveRun(run);
+    this.broadcast({ type: 'run-event', runId, event: 'test-jira-issue', payload: { testId, jiraIssue } });
+    return jiraIssue;
   }
 
   _getTest(runId, testId) {
@@ -813,6 +880,11 @@ class RunManager {
     this._saveRun(run);
     this.broadcast({ type: 'run-event', runId, event: 'test-spot-fix', payload: { testId, spotFix: test.spotFix } });
     this._broadcastAppliedSpotFixes();
+    if (test.jiraIssue) {
+      addJiraComment(test.jiraIssue.key, `Spot fix applied (confidence: ${test.spotFix.confidence}).${test.spotFix.explanation ? ` ${test.spotFix.explanation}` : ''}`).catch((err) =>
+        console.error(`[dashboard] could not post spot-fix update to ${test.jiraIssue.key} (non-fatal):`, err.message)
+      );
+    }
 
     const rerunRunId = rerun ? this.rerun(runId, { scope: 'test', target: testId }) : null;
     if (verify && rerunRunId) {
@@ -916,6 +988,11 @@ class RunManager {
           event: 'test-spot-fix',
           payload: { testId: pending.testId, spotFix: test.spotFix },
         });
+        if (test.jiraIssue) {
+          addJiraComment(test.jiraIssue.key, `Spot-fix verification: ${verification.detail}`).catch((err) =>
+            console.error(`[dashboard] could not post verification update to ${test.jiraIssue.key} (non-fatal):`, err.message)
+          );
+        }
       }
     } catch {
       // Source run is gone; the working tree is already in the right state.
@@ -977,6 +1054,11 @@ class RunManager {
     this._saveRun(run);
     this.broadcast({ type: 'run-event', runId, event: 'test-spot-fix', payload: { testId, spotFix: test.spotFix } });
     this._broadcastAppliedSpotFixes();
+    if (test.jiraIssue) {
+      addJiraComment(test.jiraIssue.key, 'Spot fix reverted.').catch((err) =>
+        console.error(`[dashboard] could not post revert update to ${test.jiraIssue.key} (non-fatal):`, err.message)
+      );
+    }
     return result;
   }
 

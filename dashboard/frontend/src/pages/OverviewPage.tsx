@@ -154,7 +154,7 @@ export function OverviewPage() {
         <div className="card">
           <h3>Flaky tests</h3>
           {stats.flaky.length === 0 ? (
-            <p className="muted">No flaky tests detected — nice.</p>
+            <p className="muted">No flaky tests detected across recorded runs. A test appears here only once it has both passed and failed at different times.</p>
           ) : (
             <ul className="insight-list">
               {stats.flaky.map((t) => (

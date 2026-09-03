@@ -3,6 +3,9 @@ import type {
   AutoUpdateStatus,
   ChatReply,
   ChatTurn,
+  JiraIssue,
+  JiraIssueTypeOption,
+  JiraSettings,
   Platform,
   ProjectsManifest,
   RcaResult,
@@ -34,11 +37,20 @@ export const api = {
   getAutoUpdateStatus: () => request<AutoUpdateStatus>('/api/auto-update/status'),
 
   getPlatforms: () => request<{ platforms: Platform[] }>('/api/platforms'),
+  getClientInfo: () => request<{ name: string | null }>('/api/client-info'),
+  switchBranch: (branch: string) =>
+    request<{ branch: string; commit: string; projectCount: number }>('/api/switch-branch', {
+      method: 'POST',
+      body: JSON.stringify({ branch }),
+    }),
 
   listRuns: (limit = 20, platform?: string) =>
     request<RunRecord[]>(`/api/runs?limit=${limit}${platform ? `&platform=${encodeURIComponent(platform)}` : ''}`),
 
   getRun: (runId: string) => request<RunRecord>(`/api/runs/${runId}`),
+
+  emailRun: (runId: string, body: { to: string; pdfBase64?: string; filename?: string }) =>
+    request<{ sent: true; recipients: string[] }>(`/api/runs/${runId}/email`, { method: 'POST', body: JSON.stringify(body) }),
 
   startRun: (body: { env: string; project?: string; grep?: string }) =>
     request<{ runId: string }>('/api/runs', { method: 'POST', body: JSON.stringify(body) }),
@@ -67,6 +79,25 @@ export const api = {
 
   analyzeTest: (runId: string, testId: string) =>
     request<RcaResult>(`/api/runs/${runId}/tests/${encodeURIComponent(testId)}/analyze`, { method: 'POST' }),
+
+  reportBug: (runId: string, testId: string, body: { summary?: string; notes?: string; priority?: string }) =>
+    request<JiraIssue>(`/api/runs/${runId}/tests/${encodeURIComponent(testId)}/report-bug`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
+
+  // The sidebar's general "Report a bug" form — not tied to any run/test.
+  reportGeneralBug: (body: { summary: string; notes?: string; priority?: string }) =>
+    request<JiraIssue>('/api/report-bug', { method: 'POST', body: JSON.stringify(body) }),
+
+  getJiraSettings: () => request<JiraSettings>('/api/settings/jira'),
+
+  saveJiraSettings: (body: { baseUrl: string; email: string; apiToken?: string; projectKey: string; issueType: string }) =>
+    request<JiraSettings>('/api/settings/jira', { method: 'POST', body: JSON.stringify(body) }),
+
+  // apiToken omitted means "use whatever's already saved" — same convention as saveJiraSettings.
+  fetchJiraIssueTypes: (body: { baseUrl: string; email: string; apiToken?: string; projectKey: string }) =>
+    request<{ issueTypes: JiraIssueTypeOption[] }>('/api/settings/jira/issue-types', { method: 'POST', body: JSON.stringify(body) }),
 
   // Read-only: every past run where this exact test case (matched by ticket
   // id, not file+line) showed up, with what RCA/spot-fix concluded each time.
