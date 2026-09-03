@@ -1,0 +1,1172 @@
+{
+    "tc-auth-001-invalid-credentials": {
+        "mode": "invalid",
+        "email": "abcd@gmail.com",
+        "password": "Hello@123",
+        "expectedErrorMessage": "Your login credentials are incorrect"
+    },
+    "tc-auth-002-forgot-password": {
+        "expectedHeading": "Confirm Email Address"
+    },
+    "tc-auth-003-forgot-password-proceed": {
+        "email": "abcd@gmail.com",
+        "expectedOTPIdentity": "Verify your identity"
+    },
+    "tc-auth-004-forgot-password-mobile": {
+        "mobileNumber": "976543210",
+        "expectedErrorMessage": "Please enter a valid email to continue."
+    },
+    "tc-auth-005-welcome-ui": {
+        "expectedHeading": "Welcome to iWant",
+        "expectedSubheading": "Home of Filipino Stories"
+    },
+    "tc-auth-006-valid-login": {
+        "mode": "valid"
+    },
+    "tc-auth-007-navigate-tabs": {
+        "mode": "valid",
+        "expectedSearchPlaceholder": "Search by title, actor, genre..."
+    },
+    "tc-auth-005-tv-provider-login": {
+        "providerName": "Frontier, a Verizon Company",
+        "mode": "provider"
+    },
+    "tc-auth-020-forgot-password-otp": {
+        "password": "Abcd@1234",
+        "expectedMarketingText": "I agree to receive marketing communications",
+        "expectedOTPHeading": "Verify your identity",
+        "expectedNewPasswordHeading": "Set a New Password"
+    },
+    "tc-auth-021-forgot-password-reset-popup": {
+        "password": "Abcd@1234",
+        "newPassword": "iWant_tfc_004",
+        "expectedMarketingText": "I agree to receive marketing communications",
+        "expectedOTPHeading": "Verify your identity",
+        "expectedNewPasswordHeading": "Set a New Password",
+        "expectedSuccessMessage": "New Password Set Successfully"
+    },
+    "tc-auth-022-reset-password-login": {
+        "password": "Abcd@1234",
+        "newPassword": "iWant_tfc_004",
+        "expectedMarketingText": "I agree to receive marketing communications",
+        "expectedOTPHeading": "Verify your identity",
+        "expectedNewPasswordHeading": "Set a New Password",
+        "expectedSuccessMessage": "New Password Set Successfully"
+    },
+    "tc-ad-001-mid-rail-spacing": {
+        "mode": "freeUser"
+    },
+    "tc-ad-002-mid-rail-gam": {
+        "mode": "freeUser",
+        "expectedAdHost": "securepubads.g.doubleclick.net"
+    },
+    "tc-ad-003-mid-rail-refresh": {
+        "mode": "freeUser",
+        "expectedAdHost": "securepubads.g.doubleclick.net",
+        "refreshWindowMs": 35000,
+        "minimumRefreshRequests": 1
+    },
+    "tc-disc-001-show-details-navigation": {
+        "mode": "valid",
+        "expectedYear": "2026",
+        "expectedGenre": "Action"
+    },
+    "tc-disc-002-content-details-ui": {
+        "mode": "valid"
+    },
+    "tc-disc-003-watchlist-details-page": {
+        "mode": "valid"
+    },
+    "tc-disc-009-premium-icon-display": {
+        "mode": "freeUser"
+    },
+    "tc-disc-010-subscribe-cta-on-details-page": {
+        "mode": "freeUser"
+    },
+    "tc-disc-011-movie-completion-redirect": {
+        "mode": "valid"
+    },
+    "tc-disc-012-shared-deeplink-redirect": {
+        "mode": "valid"
+    },
+    "tc-disc-013-trailer-autoplay": {
+        "mode": "valid"
+    },
+    "tc-disc-014-episode-playback-on-details-page": {
+        "mode": "valid"
+    },
+    "tc-disc-002-episode-playback": {
+        "mode": "valid",
+        "searchTerm": "The Blood Sisters"
+    },
+    "tc-disc-003-remove-continue-watching": {
+        "mode": "valid",
+        "searchTerm": "The Blood Sisters",
+        "contentTitle": "The Blood Sisters"
+    },
+    "tc-auth-006-create-account-ui": {
+        "expectedHeading": "Create an account",
+        "expectedEmailLabel": "Email Address",
+        "expectedPasswordLabel": "Password",
+        "expectedTermsText": "I agree to the Terms and Conditions and Privacy Policy",
+        "expectedMarketingText": "I agree to receive marketing communications (until I unsubscribe).",
+        "expectedContinueLabel": "Continue",
+        "expectedLoginPrompt": "Already Have an Account?",
+        "expectedLoginLinkText": "Login"
+    },
+    "tc-auth-007-empty-credentials": {
+        "email": "",
+        "password": "",
+        "expectedErrorMessage": "Email is required"
+    },
+    "tc-auth-008-mobile-login": {
+        "mode": "mobile"
+    },
+    "tc-auth-009-help-support-links": {
+        "mode": "valid",
+        "expectedHelpAndSupportHeading": "How can we help you today?",
+        "expectedTermsHeading": "Welcome to the ABS-CBN’s terms & conditions.",
+        "expectedPrivacyHeading": "Welcome to the ABS-CBN’s privacy notice.",
+        "expectedCookieHeading": "iWant Cookie Policy"
+    },
+    "tc-auth-010-terms-navigation": {
+        "mode": "valid",
+        "sectionLinkText": "For customers in the Philippines",
+        "subModuleName": "terms-and-conditions",
+        "expectedUrlPart": "for-customers-in-the-philippines",
+        "expectedHeading": "Customers in the Philippines"
+    },
+    "tc-auth-011-terms-search": {
+        "mode": "valid",
+        "searchQuery": "For the customers in the Philippines",
+        "expectedResultsPresent": true
+    },
+    "tc-auth-016-application-version": {
+        "mode": "valid",
+        "expectedTermsHeading": "Welcome to the ABS-CBN’s terms & conditions."
+    },
+    "tc-auth-013-terms-search-results": {
+        "mode": "valid",
+        "searchQuery": "Terms & Conditions of Subscription and/or use for Customers in the Philippines",
+        "expectedResultsPresent": true
+    },
+    "tc-auth-012-terms-page-details": {
+        "mode": "valid",
+        "sectionLinkText": "The Data We Collect About You",
+        "subModuleName": "privacy-notice",
+        "expectedUrlPart": "the-data-we-collect-about-you",
+        "expectedHeading": "THE DATA WE COLLECT ABOUT YOU"
+    },
+    "tc-auth-014-terms-introduction": {
+        "mode": "valid",
+        "sectionLinkText": "For customers in Canada",
+        "subModuleName": "terms-and-conditions",
+        "expectedUrlPart": "for-customers-in-canada",
+        "expectedHeading": "Customers in the Canada"
+    },
+    "tc-auth-015-terms-page-links": {
+        "mode": "valid",
+        "sectionLinkText": "Customers in the Japan and South Korea",
+        "subModuleName": "terms-and-conditions",
+        "expectedUrlPart": "for-customers-in-japan-and-south-korea",
+        "expectedHeading": "Customers in the Japan and South Korea"
+    },
+    "tc-auth-016-synacor-logout": {
+        "mode": "provider",
+        "providerName": "Frontier, a Verizon Company"
+    },
+    "tc-auth-017-synacor-profile-edit-restriction": {
+        "mode": "provider",
+        "providerName": "Frontier, a Verizon Company"
+    },
+    "tc-auth-018-synacor-provider-login": {
+        "mode": "provider",
+        "providerName": "Frontier, a Verizon Company"
+    },
+    "tc-auth-019-vpn-playback-restriction": {
+        "mode": "valid",
+        "searchQuery": "Incognito",
+        "expectedVPNErrorMessage": "We detected that you’re using a VPN or proxy. Please disable it and try again.",
+        "pin": "1234"
+    },
+    "tc-home-top10-tag": {
+        "mode": "valid"
+    },
+    "tc-auth-020-vpn-whitelisted-playback": {
+        "mode": "valid"
+    },
+    "tc-discovery-001-early-access": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access",
+        "earlyAccessAttributeValue": "early_access"
+    },
+    "tc-discovery-002-early-access-upgrade-prompt": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access",
+        "earlyAccessAttributeValue": "early_access",
+        "recentlyAddedAttributeValue": "recently_added",
+        "expectedUpgradeTitle": "Unlock Early Access",
+        "expectedUpgradeDescription": "Upgrade to Premium for exclusive early viewing and be the first to watch new content.",
+        "expectedMaybeLaterText": "Maybe Later",
+        "expectedUpgradeCtaText": "Upgrade to Watch Now",
+        "mwebExpectedUpgradeMessage": "A valid subscription is required to view this content. Please subscribe or renew your plan.",
+        "mwebExpectedErrorCode": "EPS-401-24",
+        "mwebExpectedCtaText": "Login",
+        "pin": "1234"
+    },
+    "tc-discovery-003-early-access-popup": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access",
+        "earlyAccessAttributeValue": "early_access",
+        "recentlyAddedAttributeValue": "recently_added",
+        "expectedUpgradeTitle": "Unlock Early Access",
+        "expectedUpgradeDescription": "Upgrade to Premium for exclusive early viewing and be the first to watch new content.",
+        "expectedMaybeLaterText": "Maybe Later",
+        "expectedUpgradeCtaText": "Upgrade to Watch Now",
+        "mwebExpectedUpgradeMessage": "A valid subscription is required to view this content. Please subscribe or renew your plan.",
+        "mwebExpectedErrorCode": "EPS-401-24",
+        "mwebExpectedCtaText": "Login",
+        "pin": "1234"
+    },
+    "tc-discovery-004-early-access-episode-tag": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access",
+        "earlyAccessAttributeValue": "early_access"
+    },
+    "tc-discovery-005-early-access-continue-watching": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access",
+        "earlyAccessAttributeValue": "early_access",
+        "pin": "1234"
+    },
+    "tc-002-early-access-may-be-later": {
+        "mode": "freeUser",
+        "pin": "1234",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access",
+        "earlyAccessAttributeValue": "early_access"
+    },
+    "tc-003-early-access-subscription-flow": {
+        "mode": "freeUser",
+        "pin": "1234",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access",
+        "earlyAccessAttributeValue": "early_access"
+    },
+    "tc-auth-009-welcome-screen-navigation": {
+        "expectedHeading": "Welcome to iWant",
+        "expectedSubheading": "Home of Filipino Stories"
+    },
+    "tc-auth-010-welcome-screen-ui": {
+        "expectedHeading": "Welcome to iWant",
+        "expectedSubheading": "Home of Filipino Stories"
+    },
+    "tc-auth-011-create-account-credentials": {
+        "email": "testuser@example.com",
+        "password": "Password123!"
+    },
+    "tc-auth-026-registration-navigation": {
+        "email": "abcde@gmail.com",
+        "password": "Abcd@1234",
+        "confirmPassword": "Abcd@1234",
+        "expectedHeading": "Create an account",
+        "expectedTermsText": "I agree to the Terms and Conditions and Privacy Policy",
+        "expectedMarketingText": "I agree to receive marketing communications",
+        "expectedOTPHeading": "Verify OTP",
+        "expectedOTPMessagePrefix": "A verification OTP was sent to",
+        "expectedOTPInputText": "Input the code below to proceed",
+        "expectedVerifyButtonText": "Verify",
+        "expectedBackToLoginText": "Back to Login"
+    },
+    "tc-auth-012-create-account-invalid-credentials": {
+        "email": "invalid-email",
+        "password": "invalidPass1",
+        "expectedErrorMessage": "Invalid email address"
+    },
+    "tc-auth-013-unregistered-user-login": {
+        "email": "newusernotregistered@example.com",
+        "password": "NewUser123!",
+        "expectedErrorMessage": "Your login credentials are incorrect"
+    },
+    "tc-auth-014-password-visibility-toggle": {
+        "email": "abcd@gmail.com",
+        "password": "Password123!"
+    },
+    "tc-disc-004-skip-intro": {
+        "mode": "valid",
+        "pin": "1234",
+        "searchTerm": "Lavender Fields"
+    },
+    "tc-disc-004-player-close-return": {
+        "mode": "valid"
+    },
+    "tc-auth-034-details-page-back-navigation": {
+        "mode": "valid",
+        "query": "The Blood Sisters"
+    },
+    "tc-auth-035-welcome-introduction-pagination": {
+        "mode": "valid"
+    },
+    "tc-auth-036-because-you-watched-rail": {
+        "mode": "valid"
+    },
+    "tc-auth-039-because-you-watched-genre-update": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-auth-037-mid-rail-banner-adl": {
+        "mode": "freeUser"
+    },
+    "tc-auth-040-mid-rail-banner-ad-source": {
+        "mode": "freeUser"
+    },
+    "tc-auth-038-mid-rail-banner-adl-refresh": {
+        "mode": "freeUser"
+    },
+    "tc-disc-005-skip-recap": {
+        "mode": "valid",
+        "searchTerm": "Lavender Fields"
+    },
+    "tc-disc-006-skip-recap": {
+        "mode": "valid",
+        "pin": "1234",
+        "searchTerm": "Lavender Fields"
+    },
+    "tc-disc-007-skip-outro": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-disc-008-skip-markers-continue-watching": {
+        "mode": "valid",
+        "pin": "1234",
+        "searchTerm": "Incognito"
+    },
+    "tc-sub-001-subscribe-to-watch": {
+        "mode": "freeUser",
+        "searchTerm": "Karnal"
+    },
+    "tc-sub-002-upgrade-plan": {
+        "mode": "freeUser"
+    },
+    "tc-sub-004-premium-crown-icon": {
+        "graphqlQueryName": "Collection",
+        "expectedMonetizationType": "Premium"
+    },
+    "tc-sub-003-gma-subscribe-popup": {
+        "mode": "freeUser"
+    },
+    "tc-sub-004-deeplink-premium-blocker": {
+        "mode": "freeUser"
+    },
+    "tc-auth-015-account-subscriptions": {
+        "mode": "provider",
+        "providerName": "Frontier, a Verizon Company",
+        "expectedSectionName": "Account",
+        "expectedSubscriptionText": "Subscription"
+    },
+    "tc-auth-016-watchlist-management": {
+        "mode": "provider",
+        "query": "collection",
+        "graphqlQueryName": "Collection",
+        "providerName": "Frontier, a Verizon Company"
+    },
+    "tc-auth-017-ph-region-guest-watchlist": {
+        "expectedHeading": "Welcome to iWant"
+    },
+    "tc-auth-018-live-content-watchlist-absence": {
+        "liveContentName": "DZMM Teleradyo",
+        "mode": "freeUser",
+        "expectedHeading": "Welcome to iWant"
+    },
+    "tc-auth-023-continue-watching-playback-synacor": {
+        "mode": "provider",
+        "providerName": "Frontier, a Verizon Company"
+    },
+    "tc-auth-025-synacor-landing-pages": {
+        "mode": "provider",
+        "providerName": "Frontier, a Verizon Company"
+    },
+
+    "tc-discovery-002-early-access-premium-monthly": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access",
+        "earlyAccessAttributeValue": "early_access"
+    },
+
+    "tc-cw-1948-free-and-paid-content": {
+        "mode": "valid"
+    },
+    "tc-auth-023-continue-watching-playback": {
+        "mode": "valid"
+    },
+    "tc-auth-024-continue-watching-across-tabs": {
+        "mode": "valid",
+        "tabs": [
+            "Movies",
+            "Shows"
+        ]
+    },
+    "tc-auth-025-continue-watching-resume-cta": {
+        "mode": "valid"
+    },
+    "tc-auth-026-continue-watching-resume-playback": {
+        "mode": "valid"
+    },
+    "tc-auth-027-continue-watching-five-percent": {
+        "mode": "valid"
+    },
+    "tc-home-001-iwant-originals-rail": {
+        "mode": "valid"
+    },
+    "tc-home-002-iwant-originals-rail-scroll": {
+        "mode": "valid"
+    },
+    "tc-home-003-iwant-originals-hover-preview": {
+        "mode": "valid"
+    },
+    "tc-home-004-iwant-originals-preview-details": {
+        "mode": "valid"
+    },
+    "tc-auth-020-free-tag-watchlist": {
+        "email": "abhilash584@gmail.com",
+        "password": "Test1234",
+        "searchTerm": "Blood vs Duty",
+        "contentTitle": "Blood vs Duty"
+    },
+    "tc-auth-021-add-free-watchlist": {
+        "email": "sanitycheck@yopmail.com",
+        "password": "Test1234",
+        "searchTerm": "I Am Your Daughter",
+        "contentTitle": "I Am Your Daughter"
+    },
+    "tc-auth-022-remove-free-watchlist": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-watch-004-add-content-from-search-page": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-watch-005-add-premium-content-to-watchlist": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-watch-007-free-tag-visible-in-watchlist": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-watch-008-add-free-content-to-watchlist": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-watch-005-remove-content-from-search-page": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-watch-006-remove-premium-content-from-watchlist": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-watch-009-watchlist-thumbnail-metadata": {
+        "mode": "freeUser"
+    },
+    "tc-watch-011-watchlist-tagged-content": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection",
+        "labels": [
+            "Recently Added",
+            "New Episode",
+            "Early Access"
+        ]
+    },
+    "tc-watch-010-play-content-from-watchlist": {
+        "mode": "freeUser"
+    },
+    "tc-watch-002-metadata-validation": {
+        "mode": "valid",
+        "email": "sanitycheck@yopmail.com",
+        "password": "Test1234",
+        "assertions": [
+            "thumbnail",
+            "metadata",
+            "contentCard"
+        ]
+    },
+    "tc-auth-018-ph-region-guest-search": {
+        "searchTerm": "Lavender Fields",
+        "expectedTitle": "Lavender Fields"
+    },
+    "tc-auth-019-ph-region-guest-subscribe": {
+        "expectedHeading": "Welcome to iWant"
+    },
+    "tc-auth-020-ph-region-guest-share": {
+        "expectedShareMessage": "Share link copied to clipboard"
+    },
+    "tc-auth-021-ph-region-guest-watchlist-hover": {
+        "graphqlQueryName": "Collection",
+        "expectedHeading": "Welcome to iWant"
+    },
+    "tc-auth-022-ph-region-guest-carousel-tab-tray": {
+        "mode": "guest"
+    },
+    "tc-auth-017-edit-profile-name-validation": {
+        "mode": "valid",
+        "firstName": "Abhilash123",
+        "lastName": "Test456"
+    },
+    "tc-nav-001-search-icon": {
+        "mode": "valid"
+    },
+    "tc-nav-002-search-query": {
+        "mode": "valid",
+        "query": "Abandoned"
+    },
+    "tc-nav-003-search-results": {
+        "mode": "valid",
+        "query": "Abandoned"
+    },
+    "tc-nav-004-watchlist-hover": {
+        "mode": "valid",
+        "query": "Abandoned"
+    },
+    "tc-nav-005-watchlist-remove": {
+        "mode": "valid",
+        "query": "Abandoned"
+    },
+    "tc-nav-011-free-premium-labels": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-nav-026-search-result-label-ui": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-nav-012-partial-search": {
+        "mode": "valid"
+    },
+    "tc-nav-013-search-result-redirect": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-nav-014-search-smooth-scrolling": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-nav-020-search-exact-title-match-top": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-nav-021-search-trending-results": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-nav-022-search-top-picks-title": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection",
+        "expectedHeading": "Top Picks Near You"
+    },
+    "tc-nav-023-search-trending-hidden-on-query": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection",
+        "secondarySearchQuery": "LOVE",
+        "expectedHeading": "Top Picks Near You"
+    },
+    "tc-nav-024-trending-content-detail-navigation": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection",
+        "expectedHeading": "Top Picks Near You"
+    },
+    "tc-nav-025-search-results-guest": {
+        "searchQuery": "Abandoned"
+    },
+    "tc-sub-001-free-subscribe": {
+        "mode": "freeUser",
+        "query": "Karnal"
+    },
+    "tc-sub-004-resume-playback": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection",
+        "pin": "1234"
+    },
+    "tc-sub-003-play-content": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-005-smooth-playback": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-006-seek-bar-drag": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection",
+        "seekPercent": 0.35
+    },
+    "tc-sub-007-live-stream-seek-restriction": {
+        "mode": "valid",
+        "pin": "1234",
+        "channelName": "TFC Asia"
+    },
+    "tc-sub-008-browser-seek-bar": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection",
+        "seekPercent": 0.35
+    },
+    "tc-sub-009-player-controls": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-010-go-live-playback": {
+        "mode": "valid",
+        "channelName": "TFC Asia",
+        "pin": "1234"
+    },
+    "tc-sub-043-go-live-tag-pause": {
+        "mode": "valid",
+        "pin": "1234",
+        "channelName": "TFC Asia"
+    },
+    "tc-sub-011-pre-roll-ad": {
+        "mode": "freeUser",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-037-ad-label-visible": {
+        "mode": "freeUser",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-038-ad-seekbar-hidden": {
+        "mode": "freeUser",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-012-pause-ad": {
+        "mode": "freeUser",
+        "query": "Eva Fonda",
+        "expectedTitle": "Eva Fonda",
+        "expectedEpisode": "Eva Fonda"
+    },
+    "tc-ad-3998-pause-ad-live-channel": {
+        "mode": "freeUser",
+        "liveContentName": "DZMM Teleradyo"
+    },
+    "tc-ad-3978-pause-ad-player-screen": {
+        "mode": "freeUser",
+        "query": "DZMM Teleradyo",
+        "liveContentName": "DZMM Teleradyo"
+    },
+    "tc-ad-4009-pause-ad-micro-drama": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection",
+        "query": "Quick Feels"
+    },
+    "tc-ad-3986-pause-ad-different-users": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection",
+        "providerName": "Frontier, a Verizon Company"
+    },
+    "tc-ad-3991-pause-ad-premium-or-gma": {
+        "mode": "valid",
+        "liveContentName": "DZMM Teleradyo"
+    },
+    "tc-ad-4014-pause-screen-premium-or-gma": {
+        "mode": "valid"
+    },
+    "tc-ad-3985-pause-ad-disappears-on-resume": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-ad-4017-pause-ad-not-displayed-while-playing": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-ad-3981-pause-ad-clickable": {
+        "mode": "freeUser"
+    },
+    "tc-ad-3990-pause-ad-fullscreen": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-ad-4019-mid-roll-ad-fullscreen": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-ad-4013-next-episode-fullscreen": {
+        "mode": "valid"
+    },
+    "tc-ad-3992-pause-ad-seek-restriction": {
+        "mode": "freeUser",
+        "query": "Eva Fonda"
+    },
+    "tc-ad-3997-dismiss-ad-cta": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-ad-4011-pause-ad-no-overlap": {
+        "mode": "freeUser"
+    },
+    "tc-ad-4010-pause-ad-skip-intro-recap-go-live": {
+        "mode": "freeUser",
+        "searchTerm": "Lavender Fields",
+        "liveContentName": "DZMM Teleradyo"
+    },
+    "tc-ad-4015-pause-ad-up-next-overlap": {
+        "mode": "freeUser",
+        "searchTerm": "Lavender Fields"
+    },
+    "tc-ad-4018-pause-ad-controls-dismissed": {
+        "mode": "freeUser",
+        "query": "Incognito"
+    },
+    "tc-ad-3995-pause-ad-back-navigation": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-ad-3988-repeated-pauses": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-ad-4003-pause-ad-no-reappear-within-3s": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-ad-3980-billboard-ad-banner": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-013-pause-playback": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-014-pause-resume": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-015-pause-seek-buttons": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection",
+        "pin": "1234"
+    },
+    "tc-sub-016-fullscreen-icon": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-025-fullscreen-functionality": {
+        "mode": "valid",
+        "pin": "1234",
+        "query": "Ang Panday",
+        "expectedTitle": "Ang Panday",
+        "expectedEpisode": "Ang Panday"
+    },
+    "tc-sub-026-landscape-player-ui": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-027-next-episode-cta": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-028-up-next-marker": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-029-back-button-navigation": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-035-up-next-marker-navigation": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-036-auto-next-episode-playback": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-037-up-next-marker-functionality": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-038-up-next-close-button": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-039-up-next-marker-click-navigation": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-030-player-controls-autodismiss": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-031-player-controls-hover-dismiss": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-032-volume-button-control": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-033-end-to-end-launch-login-search-playback": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-017-timestamp-format": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-018-short-duration-timestamp-format": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-019-subtitle-selection": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-020-subtitle-next-episode": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-021-subtitle-carry-over": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-022-subtitle-default-off": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-023-subtitle-display": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-024-subtitle-synchronization": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-034-seekbar-preview": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-settings-001-parental-controls": {
+        "mode": "freeUser"
+    },
+    "tc-settings-002-parental-toggle-disabled": {
+        "mode": "freeUser"
+    },
+    "tc-settings-003-parental-password-field": {
+        "mode": "freeUser"
+    },
+    "tc-settings-004-parental-pin-submission": {
+        "mode": "freeUser",
+        "expectedPinSetupMessage": "Set an account owner PIN"
+    },
+    "tc-settings-005-parental-password-visibility": {
+        "mode": "freeUser",
+        "expectedEyeIconVisible": true,
+        "expectedPasswordVisible": true
+    },
+    "tc-settings-006-parental-invalid-password": {
+        "mode": "freeUser",
+        "invalidPassword": "wrongpassword123",
+        "expectedErrorMessage": "Invalid credentials. Please try again."
+    },
+    "tc-settings-007-parental-pin-4digit": {
+        "mode": "freeUser"
+    },
+    "tc-settings-008-parental-pin-numeric-only": {
+        "mode": "freeUser"
+    },
+    "tc-settings-009-parental-pin-success-message": {
+        "mode": "freeUser",
+        "pin": "1234",
+        "expectedSuccessHeader": "Parental Controls Updated",
+        "expectedSuccessDetails": "Your changes to the parental controls have been saved successfully."
+    },
+    "tc-settings-010-parental-pin-prompt-on-playback": {
+        "mode": "freeUser",
+        "pin": "1234",
+        "expectedParentalPinPromptText": "Enter the PIN to Access"
+    },
+    "tc-settings-011-parental-pin-invalid-playback": {
+        "mode": "freeUser",
+        "pin": "1234",
+        "invalidPin": "0000",
+        "expectedParentalPinPromptText": "Enter the PIN to Access",
+        "expectedInvalidPinErrorText": "Invalid Pin"
+    },
+    "tc-settings-012-parental-pin-toggle-disabled-after-password": {
+        "mode": "freeUser",
+        "expectedSuccessHeader": "Parental Controls Updated",
+        "expectedSuccessDetails": "Your changes to the parental controls have been saved successfully."
+    },
+    "tc-settings-013-parental-pin-off-allows-playback": {
+        "mode": "freeUser"
+    },
+    "tc-settings-014-parental-pin-resume-continue-watching": {
+        "mode": "valid",
+        "password": "Test1234",
+        "pin": "1234",
+        "expectedParentalPinPromptText": "Enter the PIN to Access"
+    },
+    "tc-auth-009-continue-watching-no-history": {
+        "mode": "unwatched",
+        "expectedContinueWatchingVisible": false
+    },
+    "tc-auth-010-continue-watching-tray-ui": {
+        "mode": "valid"
+    },
+    "tc-auth-011-continue-watching-tray-scroll": {
+        "mode": "valid"
+    },
+    "tc-auth-012-continue-watching-remove-item": {
+        "mode": "valid"
+    },
+    "tc-auth-013-continue-watching-removal-after-playback": {
+        "mode": "valid"
+    },
+    "tc-cw-1961-show-removal": {
+        "mode": "valid"
+    },
+    "tc-auth-014-continue-watching-details-and-more": {
+        "mode": "valid"
+    },
+    "tc-auth-014-continue-watching-persistence": {
+        "mode": "valid"
+    },
+    "tc-play-001-free-asset-playback": {
+        "mode": "freeUser"
+    },
+    "tc-play-002-premium-content-gate": {
+        "mode": "freeUser",
+        "expectedMessage": "A valid subscription is required to view this content. Please subscribe or renew your plan.",
+        "expectedMaybeLaterText": "Maybe Later",
+        "expectedSubscribeText": "Subscribe to watch"
+    },
+    "tc-live-001-pause-resume-live-playback": {},
+    "tc-watch-001-play-from-watchlist": {},
+    "tc-sub-001-carousel-subscribe-cta": {
+        "mode": "freeUser",
+        "expectedMessage": "A valid subscription is required to view this content. Please subscribe or renew your plan.",
+        "expectedMaybeLaterText": "Maybe Later",
+        "expectedSubscribeText": "Subscribe to watch"
+    },
+    "tc-sub-002-premium-carousel-subscribe-cta": {
+        "mode": "freeUser",
+        "expectedMessage": "A valid subscription is required to view this content. Please subscribe or renew your plan.",
+        "expectedMaybeLaterText": "Maybe Later",
+        "expectedSubscribeText": "Subscribe to watch"
+    },
+    "tc-nav-006-search-auto-suggestions": {
+        "mode": "valid",
+        "query": "Love",
+        "expectedSuggestionsVisible": true
+    },
+    "tc-nav-016-search-junk-characters": {
+        "mode": "valid",
+        "searchQuery": "hjbjbd    jcjbvjbe",
+        "expectedNoResultsMessage": "No results found."
+    },
+    "tc-nav-017-search-invalid-suggestions": {
+        "mode": "valid",
+        "query": "dcwhch 1234",
+        "validationType": "Partial"
+    },
+    "tc-nav-018-search-live-content-exclusion": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-nav-008-clear-search-input": {
+        "mode": "valid",
+        "query": "Abandoned"
+    },
+    "tc-nav-010-search-placeholder": {
+        "mode": "valid",
+        "expectedSearchPlaceholder": "Search by title, actor, genre..."
+    },
+    "tc-nav-009-actor-or-genre-search": {
+        "mode": "valid",
+        "actorquery": "Angel Locsin",
+        "genrequery": "Action",
+        "graphqlQueryName": "Search"
+    },
+    "tc-nav-019-search-back-navigation": {
+        "mode": "valid",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-nav-007-search-no-results": {
+        "mode": "valid",
+        "searchQuery": "tfdiyhujehfdyhglfjh843847hgfhilwajigjlu",
+        "expectedNoResultsMessage": "No results found."
+    },
+    "tc-nav-008-premium-playback": {
+        "mode": "valid",
+        "searchQuery": "La Luna Sangre",
+        "expectedPlayback": true,
+        "expectedSubscribePrompt": false
+    },
+    "tc-sub-035-add-premium-watchlist": {
+        "mode": "freeUser",
+        "email": "sanitycheck@yopmail.com",
+        "password": "Test1234",
+        "searchTerm": "Everybody Sing",
+        "contentTitle": "Everybody, Sing!"
+    },
+    "tc-disc-006-seasons-grouped": {
+        "mode": "valid"
+    },
+    "tc-disc-007-episode-list-scrollable": {
+        "mode": "valid"
+    },
+    "tc-disc-008-episode-order": {
+        "mode": "valid"
+    },
+    "tc-disc-005-share-link-copied": {
+        "mode": "valid"
+    },
+    "tc-sub-039-last-season-last-episode": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-040-movie-complete-details-navigation": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection"
+    },
+    "tc-sub-041-subscribe-to-watch-redirect-account": {
+        "mode": "freeUser",
+        "graphqlQueryName": "Collection",
+        "expectedAccountHeading": "Account"
+    },
+    "tc-auth-028-continue-watching-fifty-percent": {
+        "mode": "valid",
+        "searchTerm": "You Got Me"
+    },
+    "tc-auth-040-landing-page-ui": {
+        "mode": "valid"
+    },
+    "tc-auth-029-continue-watching-less-than-five-percent": {
+        "mode": "valid"
+    },
+    "tc-auth-030-continue-watching-resume-to-play-after-removal": {
+        "mode": "valid",
+        "season": "Season 1",
+        "episodeName": "E4"
+    },
+    "tc-cw-1930-latest-watched-episode": {
+        "mode": "valid",
+        "expectedSeasonNumber": "1",
+        "expectedEpisodeNumber": "6"
+    },
+    "tc-cw-1941-content-updated-in-tray": {
+        "mode": "valid",
+        "seekMinutes": 1
+    },
+    "tc-cw-1947-continue-watching-subscription-prompt": {
+        "mode": "freeUser",
+        "season": "Season 1",
+        "episodeName": "E1"
+    },
+    "tc-cw-1946-season-episode-update": {
+        "mode": "valid",
+        "seasonOneEpisode": "E5",
+        "seasonOneSeekPosition": 0.5,
+        "seasonTwoSeekPosition": 0.2,
+        "expectedSeasonNumber": "2",
+        "expectedEpisodeNumber": "1"
+    },
+    "tc-cw-1942-free-user-ad-resume": {
+        "mode": "freeUser"
+    },
+    "tc-cw-1955-next-episode-playback": {
+        "mode": "valid"
+    },
+    "tc-sub-046-iw3-t1956-next-season-autoplay": {
+        "mode": "valid"
+    },
+    "tc-live-2010-pause-resume-live-playback": {
+        "mode": "valid",
+        "pin": "1234"
+    },
+    "tc-sub-042-subscribed-early-access-up-next": {
+        "mode": "valid",
+        "pin": "1234",
+        "graphqlQueryName": "Collection",
+        "labelText": "Early Access"
+    },
+    "tc-auth-026-info-icon-carousel": {
+        "mode": "freeUser"
+    },
+    "tc-auth-027-carousel-subscribe-cta": {
+        "mode": "freeUser",
+        "searchText": "Everybody Sing",
+        "contentTitle": "Everybody, Sing!"
+    },
+    "tc-auth-028-movie-details-from-movies-rail": {
+        "mode": "valid"
+    },
+    "tc-auth-029-landing-page-carousel-scroll": {
+        "mode": "valid"
+    },
+    "tc-auth-031-top-10-tag-on-search": {
+        "mode": "valid",
+        "searchQuery": "Alibi"
+    },
+    "tc-auth-032-top-10-tag-on-watchlist": {
+        "mode": "valid",
+        "searchQuery": "Alibi"
+    },
+    "tc-auth-033-related-content-trays-outside-ph": {
+        "mode": "valid"
+    },
+    "tc-auth-content-watchlist-2030": {
+        "mode": "valid",
+        "pin": "1234"
+    },
+    "tc-ad-2135-sponsored-rail-visibility": {
+        "mode": "freeUser"
+    },
+    "tc-ad-2137-sponsored-rail-advertiser-logo": {
+        "mode": "freeUser"
+    },
+    "tc-ad-2149-sponsored-rail-content-details-navigation": {
+        "mode": "freeUser"
+    },
+    "tc-ad-2146-sponsored-rail-non-clickable": {
+        "mode": "freeUser"
+    }
+}

@@ -1,0 +1,21 @@
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+/playwright/
+logs/
+/src/playwright/.auth/
+# Dashboard
+dashboard/node_modules/
+dashboard/frontend/node_modules/
+dashboard/frontend/dist/
+dashboard/data/
+# Playwright MCP (locator-healing fallback) — page snapshots it writes to
+# cwd as it runs, wherever the dashboard server process's cwd is.
+.playwright-mcp/
+# Local Claude skill packages — not part of the shipped project
+/skills/
+.env

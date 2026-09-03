@@ -1,0 +1,2914 @@
+- id: "login-invalid-credentials"
+  name: "Login with invalid credentials"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "loginWithInvalidCredentials"
+  tags:
+    - auth
+    - negative
+    - smoke
+  testCases:
+    - "IW3-T1859"
+  dependsOn: []
+
+- id: "navigate-forgot-password"
+  name: "Navigate to Forgot Password page"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "navigateToForgotPassword"
+  tags:
+    - auth
+    - navigation
+    - smoke
+  testCases:
+    - "IW3-T1860"
+  dependsOn: []
+
+- id: "submit-forgot-password-email"
+  name: "Submit Forgot Password email and navigate to OTP verification"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "submitForgotPasswordEmail"
+  tags:
+    - auth
+    - navigation
+    - smoke
+  testCases:
+    - "IW3-T1861"
+  dependsOn:
+    - "navigate-forgot-password"
+
+- id: "submit-forgot-password-mobile"
+  name: "Submit Forgot Password mobile number and verify error message"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "submitForgotPasswordMobileNumber"
+  tags:
+    - auth
+    - negative
+    - smoke
+  testCases:
+    - "IW3-T1864"
+  dependsOn:
+    - "navigate-forgot-password"
+
+- id: "verify-welcome-screen-navigation"
+  name: "Verify welcome screen navigation for Non-PH region"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyWelcomeScreenUI"
+  tags:
+    - auth
+    - navigation
+    - smoke
+  testCases:
+    - "IW3-T1846"
+  dependsOn: []
+
+- id: "verify-welcome-screen-ui"
+  name: "Verify welcome screen UI for PH region"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyWelcomeScreenUI"
+  tags:
+    - auth
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T1869"
+  dependsOn: []
+
+- id: "login-to-ott"
+  name: "Login to OTT with valid credentials"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "loginToOTT"
+  tags:
+    - auth
+    - positive
+    - smoke
+  testCases:
+    - "IW3-T1870"
+  dependsOn: []
+
+- id: "navigate-to-movie-details-from-landing-page"
+  name: "Navigate to movie details from the Movies tab"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "navigateToMovieDetailsFromLandingPage"
+  tags:
+    - navigation
+    - positive
+    - smoke
+  testCases:
+    - "IW3-T1887"
+  dependsOn: []
+
+- id: "verify-landing-page-carousel-scroll"
+  name: "Verify landing page carousel scroll behavior"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyLandingPageCarouselScroll"
+  tags:
+    - navigation
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T1883"
+  dependsOn: []
+
+- id: "verify-top-10-tag-on-search-results"
+  name: "Verify Top 10 tag visibility after searching Top 10 rail content"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifyTop10TagOnSearchResults"
+  tags:
+    - navigation
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T4705"
+  dependsOn: []
+
+- id: "verify-top-10-tag-on-watchlist"
+  name: "Verify Top 10 tag visibility after adding Top 10 rail content to watchlist"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifyTop10TagOnWatchlist"
+  tags:
+    - navigation
+    - ui
+    - watchlist
+    - smoke
+  testCases:
+    - "IW3-T4706"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-landing-page-related-content-trays-outside-ph"
+  name: "Verify related content trays appear on Movies, Shows, and GMA landing pages outside the Philippines"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifyLandingPageRelatedContentTraysOutsidePH"
+  tags:
+    - navigation
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T1886"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-because-you-watched-rail"
+  name: "Verify the Because You Watched rail shows content from the same genre"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifyBecauseYouWatchedRail"
+  tags:
+    - landing
+    - recommendation
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T4659"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-because-you-watched-rail-genre-update"
+  name: "Verify the Because You Watched rail updates dynamically when watching a different genre"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifyBecauseYouWatchedRailGenreUpdate"
+  tags:
+    - landing
+    - recommendation
+    - ui
+    - smoke
+    - graphql
+  testCases:
+    - "IW3-T4660"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-mid-rail-banner-adl-visibility"
+  name: "Verify mid rail banner adl visibility across Home, Shows, Movies, GMA, and Search pages"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifyMidRailBannerAdlVisibility"
+  tags:
+    - landing
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T2127"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-mid-rail-banner-google-ads"
+  name: "Verify mid rail banner ads are served by Google Ads"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifyMidRailBannerGoogleAds"
+  tags:
+    - landing
+    - ads
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T2129"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-mid-rail-banner-adl-refresh"
+  name: "Verify mid rail banner adl loads without issues after page refresh"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifyMidRailBannerAdlRefresh"
+  tags:
+    - landing
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T2128"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-sponsored-rail-visibility"
+  name: "Verify Sponsored Rail is Displayed on Home, Shows, Movies, GMA pages"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifySponsoredRailVisibility"
+  tags:
+    - landing
+    - ads
+    - ui
+  testCases:
+    - "IW3-T2135"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-sponsored-rail-non-clickability"
+  name: "Verify Sponsored Rail is non-clickable except content cards"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifySponsoredRailNonClickability"
+  tags:
+    - landing
+    - ads
+    - ui
+  testCases:
+    - "IW3-T2146"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-sponsored-rail-advertiser-logo"
+  name: "Verify advertiser logo is displayed on the CMS-configured Sponsored Rail"
+  path: "src/businessFunction/ott-landing-bfs.ts"
+  export: "verifySponsoredRailAdvertiserLogo"
+  tags:
+    - landing
+    - ads
+    - ui
+    - mweb
+  testCases:
+    - "IW3-T2137"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-sponsored-rail-content-details-navigation"
+  name: "Verify Sponsored Rail content navigates to the respective details page"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySponsoredRailContentDetailsNavigation"
+  tags:
+    - playback
+    - landing
+    - ads
+    - navigation
+    - ui
+    - mweb
+  testCases:
+    - "IW3-T2149"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "login-with-mobile-number"
+  name: "Login with mobile number"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "loginWithMobileNumber"
+  tags:
+    - auth
+    - positive
+    - smoke
+  testCases:
+    - "IW3-T1865"
+  dependsOn: []
+
+- id: "verify-top10-tag-on-thumbnail"
+  name: "Verify Top 10 tag displayed on content thumbnails"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyTop10TagOnContentThumbnail"
+  tags:
+    - home
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T4703"
+    - "IW3-T4704"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "logout-from-ott"
+  name: "Logout from OTT after Synacor login"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "logoutFromOTT"
+  tags:
+    - auth
+    - logout
+    - smoke
+  testCases:
+    - "IW3-T3663"
+  dependsOn: []
+
+- id: "verify-synacor-profile-edit-restriction"
+  name: "Verify Synacor profile edit restriction"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySynacorProfileEditRestriction"
+  tags:
+    - auth
+    - profile
+    - smoke
+  testCases:
+    - "IW3-T3664"
+  dependsOn: []
+
+- id: "login-with-tv-provider-credentials"
+  name: "Login with TV provider credentials"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "loginWithTVProvider"
+  tags:
+    - auth
+    - positive
+    - smoke
+  testCases:
+    - "IW3-T3657"
+  dependsOn: []
+
+- id: "verify-synacor-landing-pages"
+  name: "Verify Synacor landing pages after provider login"
+  path: "src/businessFunction/ott-continue-watching-independent-bfs.ts"
+  export: "verifySynacorLandingPages"
+  tags:
+    - auth
+    - navigation
+    - smoke
+  testCases:
+    - "IW3-T3666"
+  dependsOn:
+    - "login-with-tv-provider-credentials"
+
+- id: "verify-support-and-policy-links"
+  name: "Verify support and policy links"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySupportAndPolicyLinks"
+  tags:
+    - auth
+    - navigation
+    - ui
+  testCases:
+    - "IW3-T1888"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-details-page-back-navigation"
+  name: "Verify back navigation from the content details page"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyBackNavigationFromDetailsPage"
+  tags:
+    - navigation
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T1888"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "navigate-terms-and-conditions-section"
+  name: "Navigate to a section on the Terms and Conditions page"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "navigateToTermsAndConditionsSection"
+  tags:
+    - auth
+    - navigation
+    - ui
+  testCases:
+    - "IW3-T4333"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "navigate-terms-introduction-section"
+  name: "Navigate to a section from the Introduction page on Terms and Conditions"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "navigateToTermsAndConditionsSection"
+  tags:
+    - auth
+    - navigation
+    - ui
+  testCases:
+    - "IW3-T4339"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "navigate-terms-terms-page-section"
+  name: "Navigate to a section from the Terms and Conditions page"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "navigateToTermsAndConditionsSection"
+  tags:
+    - auth
+    - navigation
+    - ui
+  testCases:
+    - "IW3-T4341"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-welcome-introduction-page-pagination"
+  name: "Verify Next and Previous pagination on the Welcome and Introduction pages"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyWelcomeIntroductionPagePagination"
+  tags:
+    - auth
+    - navigation
+    - ui
+  testCases:
+    - "IW3-T4340"
+  dependsOn: []
+
+- id: "navigate-and-verify-tabs"
+  name: "Navigate and verify tabs with rail content"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "navigateAndVerifyTabs"
+  tags:
+    - navigation
+    - positive
+    - ui
+  testCases:
+    - "IW3-T1867"
+  dependsOn: []
+
+- id: "play-free-asset"
+  name: "Play a free asset for a free user"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "playFreeAsset"
+  tags:
+    - playback
+    - positive
+    - free
+  testCases:
+    - "IW3-T1865"
+  dependsOn: []
+
+- id: "verify-live-playback-pause-resume"
+  name: "Verify live playback pause and resume controls"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyLivePlaybackPauseResume"
+  tags:
+    - playback
+    - live-tv
+    - positive
+  testCases:
+    - "IW3-T2010"
+  dependsOn: []
+
+- id: "play-content-from-watchlist"
+  name: "Play a selected content item from the watchlist"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "playContentFromWatchlist"
+  tags:
+    - playback
+    - watchlist
+    - positive
+  testCases:
+    - "IW3-T2030"
+  dependsOn: []
+
+- id: "verify-subscribe-to-watch-carousel-message"
+  name: "Verify subscribe-to-watch CTA message from carousel on Home, Shows, Movies, and GMA"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySubscribeToWatchCarouselMessage"
+  tags:
+    - playback
+    - subscription
+    - positive
+  testCases:
+    - "IW3-T2032"
+    - "IW3-T2035"
+  dependsOn: []
+
+- id: "verify-mid-rail-ad-spacing"
+  name: "Verify spacing around the mid-rail ad banner on Home, Movies, and Shows"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyMidRailAdSpacingAcrossTabs"
+  tags:
+    - playback
+    - ui
+    - mid-rail-ad
+    - positive
+  testCases:
+    - "IW3-T2132"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-mid-rail-ad-auto-refresh"
+  name: "Verify the mid-rail ad refreshes automatically"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyMidRailAdAutoRefresh"
+  tags:
+    - auth
+    - ad
+    - ui
+  testCases:
+    - "IW3-T2133"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-continue-watching-tray-ui"
+  name: "Verify the Continue Watching tray UI and content cards"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyContinueWatchingTrayUI"
+  tags:
+    - auth
+    - ui
+    - continue-watching
+  testCases:
+    - "IW3-T1932"
+  dependsOn: []
+
+- id: "verify-continue-watching-free-and-paid-content"
+  name: "Verify Continue Watching tray contains both free and paid content"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingShowsFreeAndPaidContent"
+  tags:
+    - continue-watching
+    - content-types
+  testCases:
+    - "IW3-T1948"
+  dependsOn: []
+
+- id: "verify-continue-watching-removal-after-playback"
+  name: "Verify a watched movie is removed from the Continue Watching tray"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyContinueWatchingRemovalAfterPlayback"
+  tags:
+    - auth
+    - playback
+    - continue-watching
+  testCases:
+    - "IW3-T1960"
+  dependsOn: []
+
+- id: "verify-continue-watching-details-and-more"
+  name: "Verify Continue Watching details and more navigation"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingDetailsAndMoreNavigation"
+  tags:
+    - continue-watching
+    - navigation
+    - positive
+  testCases:
+    - "IW3-T1935"
+  dependsOn: []
+
+- id: "verify-continue-watching-across-tabs"
+  name: "Verify Continue Watching content after playback from different tabs"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingAcrossTabs"
+  tags:
+    - continue-watching
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1945"
+  dependsOn: []
+
+- id: "verify-last-season-last-episode-completion"
+  name: "Verify navigation after completing last season last episode"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyLastSeasonLastEpisodeCompletionNavigationFlow"
+  tags:
+    - playback
+    - continue-watching
+    - positive
+  testCases:
+    - "IW3-T2023"
+  dataKey: "tc-sub-039-last-season-last-episode"
+  dependsOn: []
+
+- id: "verify-subscribe-to-watch-redirect-account"
+  name: "Verify Subscribe to Watch redirect navigates to Account screen"
+  path: "src/businessFunction/ott-subscription-bfs.ts"
+  export: "verifySubscribeToWatchRedirectsToAccountScreen"
+  tags:
+    - subscription
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2027"
+  dataKey: "tc-sub-041-subscribe-to-watch-redirect-account"
+  dependsOn: []
+
+- id: "verify-next-season-first-episode-autoplay"
+  name: "Verify next season first episode auto-plays after last episode completes"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyNextSeasonFirstEpisodeAutoPlayFlow"
+  tags:
+    - playback
+    - continue-watching
+    - positive
+  testCases:
+    - "IW3-T1956"
+  dependsOn: []
+
+- id: "verify-movie-playback-completion-details-navigation"
+  name: "Verify navigation to content details after movie playback completion"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyMoviePlaybackReturnsToDetailsFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2024"
+- id: "verify-continue-watching-tray-persistence"
+  name: "Verify Continue Watching tray persists across logout and relogin"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingTrayPersistence"
+  tags:
+    - continue-watching
+    - authentication
+    - positive
+  testCases:
+    - "IW3-T1951"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-continue-watching-playback-from-tray"
+  name: "Verify Continue Watching content resumes from the tray and playback is restored"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingPlaybackFromTray"
+  tags:
+    - continue-watching
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1934"
+  dependsOn: []
+
+- id: "verify-continue-watching-playback-from-tray-with-parental-pin"
+  name: "Verify Continue Watching content resumes from the tray after parental PIN playback prompt"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingPlaybackFromTrayWithParentalPin"
+  tags:
+    - continue-watching
+    - playback
+    - parental-pin
+    - positive
+  testCases:
+    - "IW3-T2110"
+  dependsOn:
+    - "verify-continue-watching-playback-from-tray"
+- id: "verify-continue-watching-five-percent-playback"
+  name: "Verify Continue Watching tray creation after 5% playback"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingTrayForNewUserAfterFivePercentPlayback"
+  tags:
+    - continue-watching
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1927"
+  dependsOn: []
+
+- id: "verify-resume-cta-on-details-page"
+  name: "Verify Resume CTA visibility on content details page for partially watched content"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyResumeCtaOnContentDetailsPage"
+  tags:
+    - continue-watching
+    - details
+    - positive
+  testCases:
+    - "IW3-T1958"
+  dependsOn: []
+
+- id: "verify-continue-watching-resume-playback"
+  name: "Verify Continue Watching content resumes after tapping Resume CTA"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingResumePlayback"
+  tags:
+    - continue-watching
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1959"
+  dependsOn: []
+
+- id: "verify-search-icon-visibility"
+  name: "Verify search icon visibility on navigation pages"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchIconVisibilityOnAllPages"
+  tags:
+    - navigation
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2060"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-auto-suggestions"
+  name: "Verify search auto-suggestions appear while typing"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchAutoSuggestions"
+  tags:
+    - navigation
+    - search
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2063"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-no-results"
+  name: "Verify no results message for irrelevant search terms"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchNoResultsMessage"
+  tags:
+    - navigation
+    - search
+    - negative
+    - ui
+  testCases:
+    - "IW3-T2065"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-by-actor-or-genre"
+  name: "Verify actor and genre search results through search input"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchByActorOrGenre"
+  tags:
+    - navigation
+    - search
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2068"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-free-premium-labels"
+  name: "Verify free and premium labels on search results"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchFreePremiumLabels"
+  tags:
+    - navigation
+    - search
+    - ui
+  testCases:
+    - "IW3-T2069"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-result-label-ui"
+  name: "Verify New Episode, Coming Soon, GMA, Recently Added labels appear on search results"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchResultLabelUI"
+  tags:
+    - navigation
+    - search
+    - labels
+    - ui
+  testCases:
+    - "IW3-T2082"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-partial-keyword"
+  name: "Verify search supports partial keyword in search field"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchPartialKeyword"
+  tags:
+    - navigation
+    - search
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2073"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-exact-title-match-top"
+  name: "Verify exact title matches appear at the top of search results"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchExactTitleMatchAtTop"
+  tags:
+    - navigation
+    - search
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2088"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-trending-results"
+  name: "Verify trending results are shown when opening search without a query"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchTrendingResults"
+  tags:
+    - navigation
+    - search
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2089"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-top-picks-title"
+  name: "Verify Top Picks Near You title is displayed when opening the search tab"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchTopPicksNearYouTitle"
+  tags:
+    - navigation
+    - search
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2090"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-guest-search-results-without-login"
+  name: "Verify search results appear without login"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyGuestSearchResultsWithoutLogin"
+  tags:
+    - navigation
+    - search
+    - guest
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2080"
+  dependsOn: []
+
+- id: "verify-trending-results-hidden-on-query"
+  name: "Verify trending results are hidden when user enters a search query"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyTrendingResultsHiddenWhenSearching"
+  tags:
+    - navigation
+    - search
+    - positive
+    - ui
+    - trending
+  testCases:
+    - "IW3-T2091"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-trending-content-detail-navigation"
+  name: "Verify clicking trending content navigates to the Detail Page"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyTrendingContentDetailNavigation"
+  tags:
+    - navigation
+    - search
+    - positive
+    - ui
+    - trending
+    - details
+  testCases:
+    - "IW3-T2092"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-smooth-scrolling"
+  name: "Verify smooth scrolling is maintained when searching for content"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchSmoothScrolling"
+  tags:
+    - navigation
+    - search
+    - performance
+  testCases:
+    - "IW3-T2077"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-result-redirect-to-detail"
+  name: "Verify tapping a search result navigates to the content detail page"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchResultRedirectsToDetailPage"
+  tags:
+    - navigation
+    - search
+    - ui
+  testCases:
+    - "IW3-T2076"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-search-live-content-exclusion"
+  name: "Verify live content is excluded from search when typing a live channel title"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifySearchLiveContentExclusion"
+  tags:
+    - navigation
+    - search
+    - live-tv
+    - negative
+  testCases:
+    - "IW3-T2086"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "clear-search-text-from-search-field"
+  name: "Clear search text from the search field"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "clearSearchTextFromSearchField"
+  tags:
+    - navigation
+    - search
+    - ui
+    - regression
+  testCases:
+    - "IW3-T2067"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-parental-controls-visibility"
+  name: "Verify parental controls visibility in Settings"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinOptionVisibility"
+  tags:
+    - settings
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2094"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-parental-pin-toggle-disabled"
+  name: "Verify parental PIN toggle is disabled by default"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinToggleState"
+  tags:
+    - settings
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2095"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-parental-pin-password-field"
+  name: "Verify parental PIN password field appears on toggle click"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinPasswordField"
+  tags:
+    - settings
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2097"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "submit-parental-pin-password"
+  name: "Submit parental PIN password and verify setup message"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "submitParentalPinPassword"
+  tags:
+    - settings
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2098"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-parental-pin-password-visibility"
+  name: "Verify parental PIN password visibility toggle functionality"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinPasswordVisibility"
+  tags:
+    - settings
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2099"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-player-controls-autodismiss"
+  name: "Verify player controls auto-dismiss after inactivity"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPlayerControlsAutoDismissFlow"
+  tags:
+    - playback
+    - ui
+  testCases:
+    - "IW3-T1997"
+  dependsOn: []
+
+- id: "verify-player-controls-hover-dismiss"
+  name: "Verify player controls dismissed when hovering while visible"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPlayerControlsHoverDismissFlow"
+  tags:
+    - playback
+    - ui
+  testCases:
+    - "IW3-T1998"
+  dependsOn: []
+
+- id: "verify-tap-to-pause-playback"
+  name: "Verify content pauses when the player screen is tapped while controls are visible"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyTapToPausePlaybackFlow"
+  tags:
+    - playback
+    - ui
+  testCases:
+    - "IW3-T2003"
+  dependsOn: []
+
+- id: "verify-volume-control"
+  name: "Verify user can adjust volume using volume button"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyVolumeControlFlow"
+  tags:
+    - playback
+    - ui
+  testCases:
+    - "IW3-T2005"
+  dependsOn: []
+
+- id: "verify-end-to-end-launch-login-search-playback"
+  name: "Verify end-to-end launch login navigation search and playback"
+  path: "src/businessFunction/ott-end-to-end-bfs.ts"
+  export: "verifyEndToEndLaunchLoginSearchPlaybackFlow"
+  tags:
+    - playback
+    - navigation
+    - ui
+  testCases:
+    - "end-to-end launch"
+  dependsOn: []
+
+- id: "verify-parental-pin-invalid-password-error"
+  name: "Verify parental PIN invalid password error message"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinInvalidPasswordError"
+  tags:
+    - settings
+    - negative
+    - validation
+  testCases:
+    - "IW3-T2100"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-parental-pin-4digit-input"
+  name: "Verify parental PIN 4-digit numeric input boxes appear"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinFourDigitInput"
+  tags:
+    - settings
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2101"
+    - "IW3-T2102"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-parental-pin-save-success"
+  name: "Verify parental PIN save success message appears after setup"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinSaveSuccess"
+  tags:
+    - settings
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2103"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "submit-parental-pin-password"
+  name: "Submit parental PIN password and verify setup message and toggle disable state"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "submitParentalPinPassword"
+  tags:
+    - settings
+    - positive
+    - ui
+  testCases:
+    - "IW3-T2098"
+    - "IW3-T2105"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-parental-pin-playback-prompt"
+  name: "Verify parental PIN prompt appears when playing content after setup"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinPromptOnContentPlayback"
+  tags:
+    - settings
+    - playback
+    - ui
+  testCases:
+    - "IW3-T2104"
+  dependsOn:
+    - "verify-parental-pin-save-success"
+
+- id: "verify-parental-pin-invalid-playback-prompt"
+  name: "Verify invalid parental PIN error appears during playback"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyParentalPinInvalidPlaybackPrompt"
+  tags:
+    - settings
+    - playback
+    - negative
+  testCases:
+    - "IW3-T2108"
+  dependsOn:
+    - "verify-parental-pin-save-success"
+ 
+- id: "navigate-show-details-from-shows"
+  name: "Navigate to show details from Shows page"
+  path: "src/businessFunction/ott-discovery-bfs.ts"
+  export: "navigateToShowDetailsFromShowsPage"
+  tags:
+    - discovery
+    - navigation
+  testCases:
+    - "IW3-T1895"
+  dependsOn:
+    - "login-valid-credentials"
+
+- id: "verify-content-details-page-ui"
+  name: "Verify content details page UI"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyContentDetailsPageUi"
+  tags:
+    - discovery
+    - ui
+    - positive
+  testCases:
+    - "IW3-T1896"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-premium-icon-on-details-page"
+  name: "Verify premium icon is displayed on the details page for premium content"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyPremiumIconOnDetailsPage"
+  tags:
+    - discovery
+    - ui
+    - premium
+    - positive
+  testCases:
+    - "IW3-T1899"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-auto-preview-playback"
+  name: "Verify auto playback of preview or trailer on the details page"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyAutoPlaybackOfPreviewOnDetailsPage"
+  tags:
+    - discovery
+    - preview
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1900"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-iwant-originals-preview-on-details"
+  name: "Verify preview playback on the details page from the iWant Originals rail"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyIWantOriginalsPreviewOnDetailsPage"
+  tags:
+    - discovery
+    - preview
+    - playback
+    - positive
+  testCases:
+    - "IW3-T5813"
+- id: "verify-premium-crown-icon-on-search-results"
+  name: "Verify crown icon is displayed on the premium content thumbnail in search results"
+  path: "src/businessFunction/ott-subscription-bfs.ts"
+  export: "verifyPremiumCrownIconOnSearchResults"
+  tags:
+    - subscription
+    - search
+    - premium
+    - ui
+  testCases:
+    - "IW3-T2034"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-episodes-grouped-by-season"
+  name: "Verify episodes are grouped under their respective seasons"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyEpisodesGroupedBySeason"
+  tags:
+    - discovery
+    - ui
+    - positive
+  testCases:
+    - "IW3-T1914"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-show-episode-list-scrollable-to-end"
+  name: "Verify show episode list can be scrolled to the end"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyShowEpisodeListScrollableToEnd"
+  tags:
+    - discovery
+    - ui
+    - positive
+  testCases:
+    - "IW3-T1915"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-episodes-in-ascending-order"
+  name: "Verify episodes are displayed in ascending order for show content"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyEpisodesDisplayedInAscendingOrder"
+  tags:
+    - discovery
+    - ui
+    - positive
+  testCases:
+    - "IW3-T1916"
+  dependsOn:
+    - "login-to-ott"
+   
+- id: "play-episode-from-details"
+  name: "Play episode from details page"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "playEpisodeFromDetailsPage"
+  tags:
+    - discovery
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1921"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-skip-intro-marker"
+  name: "Verify skip intro marker during playback"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifySkipIntroMarkerDuringPlayback"
+  tags:
+    - playback
+    - skip-intro
+    - positive
+  testCases:
+    - "IW3-T2112"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-skip-intro-functionality"
+  name: "Verify functionality of Skip Intro marker during playback"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifySkipIntroFunctionalityDuringPlayback"
+  tags:
+    - playback
+    - skip-intro
+    - positive
+  testCases:
+    - "IW3-T2113"
+  dataKey: "tc-disc-004-skip-intro"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-skip-recap-marker"
+  name: "Verify skip recap marker during playback"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifySkipRecapMarkerDuringPlayback"
+  tags:
+    - playback
+    - skip-recap
+    - positive
+  testCases:
+    - "IW3-T2114"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-skip-recap-functionality"
+  name: "Verify functionality of Skip Recap marker during playback"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifySkipRecapFunctionalityDuringPlayback"
+  tags:
+    - playback
+    - skip-recap
+    - positive
+  testCases:
+    - "IW3-T2115"
+  dataKey: "tc-disc-005-skip-recap"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-skip-marker-visibility-after-pause-resume"
+  name: "Verify skip markers remain visible after pausing or resuming playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySkipMarkerVisibilityAfterPauseResume"
+  tags:
+    - playback
+    - skip-marker
+    - pause-resume
+    - positive
+  testCases:
+    - "IW3-T2120"
+  dataKey: "tc-disc-005-skip-recap"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-skip-intro-and-recap-advance-playback-duration"
+  name: "Verify Skip Intro and Skip Recap advance playback by a measurable duration"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifySkipIntroAndRecapAdvancePlaybackDuration"
+  tags:
+    - playback
+    - skip-intro
+    - skip-recap
+    - positive
+  testCases:
+    - "IW3-T2121"
+  dataKey: "tc-disc-006-skip-recap"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-skip-markers-reappear-after-rewind"
+  name: "Verify skip markers reappear after rewinding playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySkipMarkersReappearAfterRewind"
+  tags:
+    - playback
+    - skip-marker
+    - rewind
+    - positive
+  testCases:
+    - "IW3-T2122"
+  dataKey: "tc-disc-006-skip-recap"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-skip-markers-not-visible-in-continue-watching"
+  name: "Verify Skip Intro and Skip Recap markers are not visible for Continue Watching content"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySkipMarkersNotVisibleInContinueWatching"
+  tags:
+    - playback
+    - skip-marker
+    - continue-watching
+    - positive
+  testCases:
+    - "IW3-T2123"
+  dataKey: "tc-disc-008-skip-markers-continue-watching"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "remove-from-continue-watching"
+  name: "Remove from Continue Watching tray"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "removeFromContinueWatching"
+  tags:
+    - playback
+    - continue-watching
+    - positive
+  testCases:
+    - "IW3-T1936"
+  dependsOn:
+    - "login-to-ott"
+    - "navigate-show-details-from-shows"
+
+- id: "verify-premium-content-deeplink-subscription-blocker"
+  name: "Verify premium content deep link shows a subscription blocker for non-subscribers"
+  path: "src/businessFunction/ott-subscription-bfs.ts"
+  export: "verifyPremiumContentDeepLinkSubscriptionBlocker"
+  tags:
+    - subscription
+    - premium
+    - deeplink
+    - positive
+  testCases:
+    - "IW3-2029"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-subscribe-to-watch-cta"
+  name: "Verify subscribe to watch CTA on premium content"
+  path: "src/businessFunction/ott-subscription-bfs.ts"
+  export: "verifySubscribeToWatchCTA"
+  tags:
+    - subscription
+    - premium
+    - positive
+  testCases:
+    - "IW3-T2033"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "navigate-to-upgrade-plan-from-subscription-blocker"
+  name: "Navigate to plan selection page from subscription blocker"
+  path: "src/businessFunction/ott-subscription-bfs.ts"
+  export: "navigateToUpgradePlanFromSubscriptionBlocker"
+  tags:
+    - subscription
+    - premium
+    - positive
+  testCases:
+    - "IW3-T1905"
+    - "IW3-T2039"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-create-account-screen-ui"
+  name: "Verify create account screen UI"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyCreateAccountScreenUI"
+  tags:
+    - auth
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T1849"
+  dependsOn: []
+
+- id: "verify-account-and-subscription-details"
+  name: "Verify account and subscription details in profile"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyAccountAndSubscriptionDetails"
+  tags:
+    - auth
+    - profile
+    - subscription
+    - positive
+  testCases:
+    - "IW3-T3658"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "validate-edit-profile-name-fields"
+  name: "Validate first name and last name fields in edit profile"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "validateEditProfileNameFields"
+  tags:
+    - auth
+    - profile
+    - validation
+    - negative
+  testCases:
+    - "1.11"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-guest-watchlist-navigation"
+  name: "Verify guest watchlist navigation from a free asset"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "verifyGuestWatchlistNavigationFromFreeAsset"
+  tags:
+    - watchlist
+    - guest
+    - ph-region
+    - negative
+  testCases:
+    - "IW3-T1872"
+  dependsOn: []
+
+- id: "verify-guest-watchlist-hover-navigation"
+  name: "Verify guest watchlist hover navigation from a tray content"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "verifyGuestWatchlistHoverNavigationFromFreeAsset"
+  tags:
+    - watchlist
+    - guest
+    - ph-region
+    - hover
+    - negative
+  testCases:
+    - "IW3-T1891"
+  dependsOn: []
+
+- id: "verify-live-content-watchlist-absence"
+  name: "Verify Add to Watchlist option is not displayed for live content"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "verifyLiveContentWatchlistAbsence"
+  tags:
+    - watchlist
+    - live
+    - negative
+  testCases:
+    - "IW3-T2047"
+  dependsOn: []
+
+- id: "verify-guest-share-functionality"
+  name: "Verify guest share functionality on content details from a free asset"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyGuestShareFunctionalityFromFreeAsset"
+  tags:
+    - details
+    - guest
+    - ph-region
+    - share
+    - positive
+  testCases:
+    - "IW3-T1873"
+  dependsOn: []
+
+- id: "verify-guest-search-navigation"
+  name: "Verify guest search navigation from a free asset"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyGuestSearchNavigationFromFreeAsset"
+  tags:
+    - discovery
+    - guest
+    - ph-region
+    - positive
+  testCases:
+    - "IW3-T1876"
+  dependsOn: []
+
+- id: "verify-guest-ph-carousel-tab-tray-load"
+  name: "Verify PH guest carousel, sub-navigation tabs and trays load properly"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyGuestPHCarouselTabTrayLoad"
+  tags:
+    - discovery
+    - guest
+    - ph-region
+    - ui
+  testCases:
+    - "IW3-T1889"
+  dependsOn: []
+
+- id: "verify-guest-subscribe-navigation"
+  name: "Verify guest subscribe CTA navigation from a free asset"
+  path: "src/businessFunction/ott-subscription-bfs.ts"
+  export: "verifyGuestSubscribeNavigationFromFreeAsset"
+  tags:
+    - subscription
+    - guest
+    - ph-region
+    - negative
+  testCases:
+    - "IW3-T1875"
+  dependsOn: []
+
+- id: "manage-watchlist-item"
+  name: "Add and remove watchlist item"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "manageWatchlistItem"
+  tags:
+    - watchlist
+    - positive
+  testCases:
+    - "IW3-T3659"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "add-content-to-watchlist-from-search-page"
+  name: "Add content to watchlist from search results via hover"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "addContentToWatchlistFromSearchPage"
+  tags:
+    - watchlist
+    - search
+    - positive
+  testCases:
+    - "IW3-T2058"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "add-content-to-watchlist-from-search-page-step"
+  name: "Add content to watchlist from search page following IW3-T2056 steps"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "addContentToWatchlistFromSearchPageStep"
+  tags:
+    - watchlist
+    - search
+    - positive
+  testCases:
+    - "IW3-T2056"
+  dependsOn: []
+
+- id: "add-free-content-to-watchlist"
+  name: "Add free content to watchlist following IW3-T2050 steps"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "addFreeContentToWatchlist"
+  tags:
+    - watchlist
+    - free-content
+    - positive
+  testCases:
+    - "IW3-T2050"
+  dependsOn: []
+
+- id: "verify-free-tag-in-watchlist"
+  name: "Verify free tag visibility for free content in watchlist following IW3-T2049 steps"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "verifyFreeTagInWatchlist"
+  tags:
+    - watchlist
+    - free-tag
+    - positive
+  testCases:
+    - "IW3-T2049"
+  dependsOn: []
+
+- id: "verify-watchlist-tagged-content"
+  name: "Verify tagged content added to watchlist and tags display correctly on My Watchlist page"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "verifyWatchlistTaggedContentFlow"
+  tags:
+    - watchlist
+    - tags
+    - positive
+  testCases:
+    - "IW3-T2054"
+  dependsOn: []
+
+- id: "add-premium-content-to-watchlist"
+  name: "Add premium content to watchlist following IW3-T2052 steps"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "addPremiumContentToWatchlist"
+  tags:
+    - watchlist
+    - premium
+    - positive
+  testCases:
+    - "IW3-T2052"
+  dependsOn: []
+
+- id: "remove-premium-content-from-watchlist"
+  name: "Remove premium content from watchlist following IW3-T2053 steps"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "removePremiumContentFromWatchlist"
+  tags:
+    - watchlist
+    - premium
+    - positive
+  testCases:
+    - "IW3-T2053"
+  dependsOn: []
+
+- id: "remove-free-content-from-watchlist"
+  name: "Remove free content from watchlist following IW3-T2051 steps"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "removeFreeContentFromWatchlist"
+  tags:
+    - watchlist
+    - positive
+  testCases:
+    - "IW3-T2051"
+  dependsOn: []
+
+- id: "verify-watchlist-content-metadata-and-thumbnails"
+  name: "Verify watchlist card thumbnails and metadata for movie/show content"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "verifyWatchlistContentMetadataAndThumbnails"
+  tags:
+    - watchlist
+    - metadata
+    - positive
+  testCases:
+    - "IW3-T2048"
+  dependsOn: []
+
+- id: "play-content-from-watchlist"
+  name: "Play free content directly from the watchlist following IW3-T2046 steps"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "playContentFromWatchlist"
+  tags:
+    - watchlist
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2046"
+  dependsOn: []
+
+- id: "remove-content-from-watchlist-from-search-page-step"
+  name: "Remove content from watchlist from search page following IW3-T2057 steps"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "removeContentFromWatchlistFromSearchPageStep"
+  tags:
+    - watchlist
+    - search
+    - positive
+  testCases:
+    - "IW3-T2057"
+  dependsOn: []
+
+- id: "remove-content-from-watchlist-from-search-page"
+  name: "Remove content from watchlist from search results via hover"
+  path: "src/businessFunction/ott-watchlist-bfs.ts"
+  export: "removeContentFromWatchlistFromSearchPage"
+  tags:
+    - watchlist
+    - search
+    - positive
+  testCases:
+    - "IW3-T2059"
+  dependsOn:
+    - "login-to-ott"
+ 
+- id: "verify-create-account-navigation"
+  name: "Verify navigation to Create Account screen"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyCreateAccountScreenUI"
+  tags:
+    - auth
+    - navigation
+    - smoke
+  testCases:
+    - "IW3-T1848"
+  dependsOn: []
+ 
+- id: "verify-registration-navigation"
+  name: "Verify Let’s Get Started registration navigation"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyRegistrationNavigation"
+  tags:
+    - auth
+    - registration
+    - smoke
+  testCases:
+    - "IW3-T1852"
+    - "IW3-T1854"
+  dependsOn:
+    - "verify-create-account-navigation"
+ 
+- id: "verify-registration-otp-screen"
+  name: "Verify registration OTP screen after Create Account"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyRegistrationOTPScreen"
+  tags:
+    - auth
+    - registration
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T1852"
+  dependsOn:
+    - "verify-registration-navigation"
+ 
+- id: "enter-create-account-credentials"
+  name: "Enter credentials on Create Account screen"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "enterCreateAccountCredentials"
+  tags:
+    - auth
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T1850"
+  dependsOn:
+    - "verify-create-account-navigation"
+
+- id: "submit-empty-credentials"
+  name: "Submit empty credentials and verify validation"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "submitEmptyCredentials"
+  tags:
+    - auth
+    - negative
+    - smoke
+  testCases:
+    - "IW3-T1856"
+  dependsOn: []
+
+- id: "verify-application-version"
+  name: "Verify application version is displayed at the bottom of the page"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyApplicationVersion"
+  tags:
+    - auth
+    - navigation
+    - ui
+  testCases:
+    - "IW3-T4335"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "search-from-terms-page"
+  name: "Search from the Terms and Conditions page"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "searchFromTermsPage"
+  tags:
+    - auth
+    - navigation
+    - search
+  testCases:
+    - "IW3-T4337"
+    - "IW3-T4338"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-terms-page-details"
+  name: "Verify page details on the Terms and Conditions page"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "verifyTermsPageDetails"
+  tags:
+    - auth
+    - navigation
+    - ui
+  testCases:
+    - "IW3-T4334"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-early-access-tag"
+  name: "Verify Early Access tag displayed on On Air content thumbnail"
+  path: "src/businessFunction/ott-early-access-bfs.ts"
+  export: "verifyEarlyAccessTag"
+  tags:
+    - discovery
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T3667"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-early-access-upgrade-prompt-message"
+  name: "Verify the Early Access upgrade prompt message for free or basic users"
+  path: "src/businessFunction/ott-early-access-bfs.ts"
+  export: "verifyEarlyAccessUpgradePromptMessage"
+  tags:
+    - discovery
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T3672"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-early-access-popup"
+  name: "Verify the Early Access popup for free or basic users"
+  path: "src/businessFunction/ott-early-access-bfs.ts"
+  export: "verifyEarlyAccessUpgradePromptMessage"
+  tags:
+    - discovery
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T3670"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-early-access-episode-tag"
+  name: "Verify Early Access tag displayed on episode thumbnail in content details"
+  path: "src/businessFunction/ott-early-access-bfs.ts"
+  export: "verifyEarlyAccessEpisodeTag"
+  tags:
+    - discovery
+    - ui
+    - smoke
+  testCases:
+    - "IW3-T3675"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-early-access-continue-watching"
+  name: "Verify Early Access content is not shown in Continue Watching after partial playback"
+  path: "src/businessFunction/ott-early-access-bfs.ts"
+  export: "verifyEarlyAccessNotInContinueWatchingAfterPlayback"
+  tags:
+    - discovery
+    - ui
+
+- id: "verify-early-access-content-not-in-continue-watching"
+  name: "Verify Early Access content is not shown in Continue Watching after partial playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyEarlyAccessContentNotInContinueWatching"
+  tags:
+    - playback
+    - continue-watching
+    - discovery
+    - smoke
+  testCases:
+    - "IW3-T3679"
+  dependsOn:
+    - "login-to-ott"
+
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-early-access-maybe-later-navigation"
+  name: "Verify tapping Maybe Later on Unlock Early Access returns user to content details page"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyEarlyAccessMaybeLaterFlow"
+  tags:
+    - playback
+    - discovery
+    - navigation
+  testCases:
+    - "IW3-T4707"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-early-access-subscription-initiation"
+  name: "Verify free user can initiate subscription flow from Early Access episode"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyEarlyAccessSubscriptionFlow"
+  tags:
+    - playback
+    - subscription
+    - discovery
+  testCases:
+    - "IW3-T3686"
+  dataKey: "tc-003-early-access-subscription-flow"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-subscribed-early-access-up-next"
+  name: "Verify subscribed user can access Early Access episode via Up Next or Next Episode CTA from player screen"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySubscribedEarlyAccessUpNextFlow"
+  tags:
+    - playback
+    - subscription
+    - discovery
+  testCases:
+    - "IW3-T3685"
+  dataKey: "tc-sub-042-subscribed-early-access-up-next"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-early-access-playback"
+  name: "Verify Early Access playback is available for Premium Monthly subscribers"
+  path: "src/businessFunction/ott-early-access-bfs.ts"
+  export: "verifyEarlyAccessPlayback"
+  tags:
+    - discovery
+    - playback
+    - smoke
+  testCases:
+    - "IW3-T3669"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-vpn-playback-restriction"
+  name: "Verify VPN playback restriction prevents playback and shows an error message"
+  path: "src/businessFunction/ott-details-bfs.ts"
+  export: "verifyVPNPlaybackRestriction"
+  tags:
+    - auth
+    - vpn
+    - negative
+    - smoke
+  testCases:
+    - "IW3-T4699"
+  dependsOn:
+    - "login-to-ott"
+- id: "submit-unregistered-user-login"
+  name: "Submit unregistered user login and verify error"
+  path: "src/businessFunction/ott-auth-bfs.ts"
+  export: "submitUnregisteredUserLogin"
+  tags:
+    - auth
+    - negative
+  testCases:
+    - "IW3-T1857"
+  dependsOn: []
+ 
+- id: "verify-free-user-subscribe-flow"
+  name: "Verify free user subscribe flow lands on subscription page"
+  path: "src/businessFunction/ott-subscription-bfs.ts"
+  export: "verifyFreeUserSubscribeFlow"
+  tags:
+    - subscription
+    - positive
+  testCases:
+    - "IW3-T1905"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "open-content-and-play"
+  name: "Open content from details page and verify player screen"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "openContentAndPlay"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1967"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-playback-resume"
+  name: "Verify playback starts post tapping on Play/Resume CTA"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPlaybackResumeFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1907"
+    - "IW3-T1975"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-smooth-playback"
+  name: "Verify video playback starts successfully and plays smoothly without interruption"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySmoothPlaybackFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1968"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-seek-bar-drag"
+  name: "Verify dragging the seek bar updates playback position"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySeekBarDragFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1999"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-browser-seek-bar"
+  name: "Verify seek bar behaves correctly across supported browsers"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyBrowserSeekBarFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2000"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-player-controls"
+  name: "Verify player controls appear when the screen is tapped during playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPlayerControlsFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2002"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-fullscreen-button"
+  name: "Verify fullscreen icon is displayed on the player screen"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyFullscreenButtonVisibilityFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1980"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-fullscreen-functionality"
+  name: "Verify tapping the fullscreen icon activates fullscreen and playback continues"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyFullscreenFunctionalityFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1987"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-landscape-player-ui"
+  name: "Verify player screen UI displays all controls in fullscreen mode"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyLandscapePlayerUIFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1988"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-next-episode-cta-visibility"
+  name: "Verify the Next Episode CTA appears under the seek bar when next episode exists"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyNextEpisodeCtaVisibilityFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1989"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-up-next-binge-marker"
+  name: "Verify the Up Next binge marker appears at the end of playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyUpNextBingeMarkerFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1990"
+    - "IW3-T2116"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-up-next-marker-navigation"
+  name: "Verify tapping the Up Next binge marker navigates and starts the next episode playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyUpNextMarkerNavigationFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1991"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-up-next-marker-functionality"
+  name: "Verify Up Next binge marker functionality navigates to next episode playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyUpNextMarkerFunctionalityFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2117" 
+
+- id: "verify-next-episode-fullscreen-playback"
+  name: "Verify next episode playback remains in fullscreen mode after selecting Up Next"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyNextEpisodePlaybackInFullscreenFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T4013"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-up-next-close-button"
+  name: "Verify the Up Next binge marker displays an X button that closes the outro"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyUpNextCloseButtonFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2118"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-up-next-marker-click-navigation"
+  name: "Verify clicking the Up Next binge marker navigates to the next episode"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyUpNextMarkerClickNavigationFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2119"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-automatic-next-episode-playback"
+  name: "Verify the player automatically navigates and starts the next episode playback without manual intervention"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyAutomaticNextEpisodePlaybackFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2004"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-back-button-navigation"
+  name: "Verify tapping the playback back button returns to the previous details screen"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyBackButtonNavigationFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1992"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-player-close-returns-to-details"
+  name: "Verify closing the player returns the user to the content details page"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPlayerCloseReturnsToDetailsFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1909"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-playback-timestamp-format"
+  name: "Verify playback timestamp is displayed in HH:MM:SS format for long-duration content"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPlaybackTimestampFormatFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1978"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-playback-short-duration-timestamp-format"
+  name: "Verify playback timestamp is displayed in MM:SS format for short-duration content"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPlaybackShortDurationTimestampFormatFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1979"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-subtitle-selection"
+  name: "Verify user can select available subtitle during playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySubtitleSelectionFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1981"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-subtitle-persistence"
+  name: "Verify selected subtitle persists when moving to the next episode"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySubtitlePersistenceFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1982"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-subtitle-carry-over"
+  name: "Verify selected subtitle carries to another content when available"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySubtitleCarryOverFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1983"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-subtitle-default-off"
+  name: "Verify subtitles are set to Off by default"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySubtitleDefaultOffFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1984"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-subtitle-display"
+  name: "Verify selected subtitles are displayed on the player screen"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySubtitleDisplayFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1985"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-subtitle-synchronization"
+  name: "Verify subtitles display correctly and remain synchronized during seek operations"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySubtitleSynchronizationFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1986"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-seekbar-preview"
+  name: "Verify seekbar thumbnail previews appear while scrubbing playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySeekbarPreviewFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T2001"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-pre-roll-ad-playback"
+  name: "Verify pre-roll ad plays automatically before main content starts"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPreRollAdPlaybackFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2013"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-ad-playback-ui"
+  name: "Verify ad playback UI displays the player screen and ad overlay"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyAdPlaybackUIFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2014"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-pre-roll-ad-skip-cta"
+  name: "Verify Skip Ad CTA appears during pre-roll ad playback and skip action functions correctly"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifySkipAdDuringPreRollAdFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2016"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-ad-label-visibility"
+  name: "Verify the player screen displays a clear and visible ad label while an ad is playing"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyAdLabelVisibilityFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2020"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-ad-seekbar-hidden"
+  name: "Verify the seek bar is not visible on the player screen during ad playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyAdSeekBarHiddenDuringAdFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2022"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-ad-duration-limit"
+  name: "Verify all ads do not exceed a maximum duration of 90 seconds"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyAdDurationFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2017"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-ad-countdown-display"
+  name: "Verify ad duration countdown and skip button countdown are displayed correctly during ad playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyAdCountdownFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2018"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-ad-learn-more-redirect"
+  name: "Verify Learn More during ad playback redirects to the ad-related page"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyAdLearnMoreRedirectFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2021"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-mid-roll-ad-interruption"
+  name: "Verify mid-roll ad interrupts main content playback at each mid-roll ad"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyMidRollAdInterruptionFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T2019"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-pause-ad-playback"
+  name: "Verify pause ad appears on player screen during pause state"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdPlaybackFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T3978"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-pause-ad-player-screen"
+  name: "Verify pause ad appears on player screen for content during pause state"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdAppearsOnPlayerScreenFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T3978"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-different-users"
+  name: "Verify pause ad is displayed for free and TV-provider users"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdDisplaysForDifferentUsersFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T3986"
+  dependsOn:
+    - "login-to-ott"
+    - "login-with-tv-provider-credentials"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-live-content-playback"
+  name: "Verify pause ad appears for live content when playback is paused"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdLiveContentPlaybackFlow"
+  tags:
+    - playback
+    - ad
+    - live-content
+    - positive
+  testCases:
+    - "IW3-T3998"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-disappears-on-resume"
+  name: "Verify pause ad disappears on player screen when playback resumes"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdDisappearsOnResumeFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T3985"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-not-displayed-while-playing"
+  name: "Verify pause ads are not displayed while video playback is in progress"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdNotDisplayedWhilePlayingFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T4017"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-clickable"
+  name: "Verify the pause ad is clickable after being displayed"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdClickableFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T3981"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-fullscreen"
+  name: "Verify the pause ad is displayed in fullscreen mode"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdFullscreenFlow"
+  tags:
+    - playback
+    - ad
+    - fullscreen
+  testCases:
+    - "IW3-T3990"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-mid-roll-ad-fullscreen"
+  name: "Verify mid-roll ads are displayed on playing full-screen content"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyMidRollAdFullscreenFlow"
+  tags:
+    - playback
+    - ad
+    - fullscreen
+    - mid-roll
+  testCases:
+    - "IW3-T4019"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-seek-restriction"
+  name: "Verify seeking is blocked while the pause ad is displayed"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdSeekRestrictionGraphQLFreeContentFlow"
+  tags:
+    - playback
+    - ad
+    - negative
+  testCases:
+    - "IW3-T3992"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-dismiss-cta-visibility"
+  name: "Verify the Dismiss Ad CTA is visible on the pause ad screen"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdDismissCtaVisibilityFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T3997"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-no-overlap"
+  name: "Verify pause ads do not overlap the dismiss CTA or playback title"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdNoOverlapWithDismissAndTitleFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T4011"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-no-overlap-on-skip-intro-recap-go-live"
+  name: "Verify pause ads do not overlap skip intro, skip recap, or Go Live CTAs"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdNotDisplayedOnSkipIntroRecapGoLiveFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T4010"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-no-overlap-up-next"
+  name: "Verify pause ads do not overlap the Up Next binge marker"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdNoOverlapWithUpNextMarkerFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T4015"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+# - id: "verify-pause-ad-no-overlap-seekbar"
+#   name: "Verify pause ads do not overlap the seek bar on player screen"
+#   path: "src/businessFunction/ott-playback-bfs.ts"
+#   export: "verifyPauseAdSeekBarOverlapFlow"
+#   tags:
+#     - playback
+#     - ad
+#     - positive
+#   testCases:
+#     - "IW3-T4011"
+#   dependsOn:
+#     - "login-to-ott"
+#   specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-controls-dismissed"
+  name: "Verify playback controls are dismissed when the pause ad is displayed"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdControlsDismissedFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T4018"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-repeated-pauses"
+  name: "Verify pause ads appear on repeated pauses during playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdRepeatedPausesFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T3988"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-no-reappear-3s"
+  name: "Verify pause ads do not reappear within 3 seconds after resuming playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdNoReappearWithin3SecFlow"
+  tags:
+    - playback
+    - ad
+    - negative
+  testCases:
+    - "IW3-T4003"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-back-navigation"
+  name: "Verify returning from the pause ad screen shows the previous playback screen"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdBackNavigationFlow"
+  tags:
+    - playback
+    - ad
+    - positive
+  testCases:
+    - "IW3-T3995"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-absence-for-premium-or-gma"
+  name: "Verify pause ads are not displayed for Premium or GMA plan users"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdAbsenceForPremiumOrGmaFlow"
+  tags:
+    - playback
+    - ad
+    - premium
+    - gma
+    - negative
+  testCases:
+    - "IW3-T3991"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-screen-for-premium-or-gma"
+  name: "Verify the pause screen is displayed for Movies and Shows content for premium or GMA users"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseScreenForPremiumOrGmaFlow"
+  tags:
+    - playback
+    - ad
+    - premium
+    - gma
+    - positive
+  testCases:
+    - "IW3-T4014"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-ad-micro-drama"
+  name: "Verify pause ads are displayed for Basic users when Micro Drama content is paused"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseAdForMicroDramaFlow"
+  tags:
+    - playback
+    - ad
+    - micro-drama
+    - basic
+    - positive
+  testCases:
+    - "IW3-T4009"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-billboard-ad-banner-visibility"
+  name: "Verify billboard ad banner appears for guest, free, and basic users"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyBillboardAdBannerVisibilityFlow"
+  tags:
+    - playback
+    - ad
+    - billboard
+    - positive
+  testCases:
+    - "IW3-T3980"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/ads.spec.ts"
+
+- id: "verify-pause-playback"
+  name: "Verify video playback pauses immediately when pause is triggered"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPausePlaybackFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1974"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-forward-backward-buttons"
+  name: "Verify forward and backward buttons function correctly when playback is paused"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyPauseforwardBackwardButtonsFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1977"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-seek-forward-backward-buttons"
+  name: "Verify 10-second forward and backward buttons change playback position"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyforwardBackwardButtonsFlow"
+  tags:
+    - playback
+    - positive
+  testCases:
+    - "IW3-T1976"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-live-tag-on-player"
+  name: "Verify LIVE tag is displayed on the player screen during live streaming"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyLiveTagOnPlayer"
+  tags:
+    - playback
+    - live-stream
+    - positive
+  testCases:
+    - "IW3-T2009"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-live-playback-go-live"
+  name: "Verify live playback begins on tapping the Live CTA"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyLivePlaybackGoLiveFlow"
+  tags:
+    - playback
+    - live-stream
+    - positive
+  testCases:
+    - "IW3-T2012"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-go-live-tag-after-pause"
+  name: "Verify Go Live tag after pausing live playback"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyGoLiveTagAfterPause"
+  tags:
+    - playback
+    - live-stream
+    - positive
+  testCases:
+    - "IW3-T2011"
+  dependsOn:
+    - "login-to-ott"
+  specFile: "tests/home/playback.spec.ts"
+
+- id: "verify-live-stream-seek-restriction"
+  name: "Verify user cannot seek in a true live stream"
+  path: "src/businessFunction/ott-playback-bfs.ts"
+  export: "verifyLiveStreamSeekRestrictionFlow"
+  tags:
+    - playback
+    - live-stream
+    - positive
+  testCases:
+    - "IW3-T2008"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-continue-watching-fifty-percent"
+  name: "Verify the Continue Watching tray upon watching 50% of the content"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContinueWatchingTrayAfterFiftyPercentPlayback"
+  tags:
+    - continue-watching
+    - home
+    - positive
+  testCases:
+    - "IW3-T1929"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "validate-continue-watching-progress-bar-percentage"
+  name: "Validate Continue Watching progress bar percentage with player seekbar progress"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "validateContinueWatchingProgressBarPercentage"
+  tags:
+    - continue-watching
+    - progress-bar
+    - positive
+  testCases:
+    - "IW3-T1929"
+  dependsOn:
+    - "login-to-ott"
+
+- id: "verify-content-updated-in-continue-watching-tray"
+  name: "Verify content is updated in Continue Watching tray when user partially watches it"
+  path: "src/businessFunction/ott-continue-watching-bfs.ts"
+  export: "verifyContentUpdatedInContinueWatchingTray"
+  tags:
+    - continue-watching
+    - partial-playback
+    - positive
+  testCases:
+    - "IW3-T1941"
+  dependsOn:
+    - "login-to-ott"

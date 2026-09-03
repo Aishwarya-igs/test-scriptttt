@@ -1,0 +1,9 @@
+{
+    "chat.mcp.serverSampling": {
+        "I_Want_TFC_Playwright_Web_Automation_fake/.vscode/mcp.json: playwright-test": {
+            "allowedModels": [
+                "copilotcli/auto"
+            ]
+        }
+    }
+}

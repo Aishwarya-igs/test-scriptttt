@@ -1,0 +1,25 @@
+{
+  "platforms": [
+    {
+      "id": "web",
+      "label": "Web",
+      "icon": "🖥",
+      "repoRoot": "..",
+      "description": ""
+    },
+    {
+      "id": "mobile",
+      "label": "Mobile",
+      "icon": "📱",
+      "repoRoot": null,
+      "description": "Mobile test suite. Set repoRoot to the checkout once that code exists."
+    },
+    {
+      "id": "tv",
+      "label": "TV",
+      "icon": "📺",
+      "repoRoot": null,
+      "description": "TV test suite. Set repoRoot to the checkout once that code exists."
+    }
+  ]
+}

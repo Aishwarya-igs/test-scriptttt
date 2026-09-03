@@ -1,0 +1,102 @@
+{
+  "environments": [
+    {
+      "value": "dev",
+      "label": "Dev"
+    },
+    {
+      "value": "qa",
+      "label": "QA"
+    },
+    {
+      "value": "prod",
+      "label": "Prod"
+    }
+  ],
+  "projects": [
+    {
+      "name": "account",
+      "label": "Account",
+      "specs": [
+        "account-subscriptions-profile.spec.ts",
+        "create-account-ui.spec.ts",
+        "parential-pin.spec.ts",
+        "subscription.spec.ts"
+      ]
+    },
+    {
+      "name": "playback",
+      "label": "Playback",
+      "specs": [
+        "playback.spec.ts",
+        "skip-intro.spec.ts",
+        "continue-watching.spec.ts"
+      ]
+    },
+    {
+      "name": "launch",
+      "label": "Launch",
+      "specs": [
+        "home-page-launch.spec.ts",
+        "landing-page-launch.spec.ts",
+        "login-page-launch.spec.ts",
+        "early-access-launch.spec.ts",
+        "synacor-page-launch.spec.ts",
+        "vpn-page-launch.spec.ts",
+        "details-page.spec.ts",
+        "registration-launch.spec.ts",
+        "iwant-originals.spec.ts",
+        "landing-page.spec.ts"
+      ]
+    },
+    {
+      "name": "search",
+      "label": "Search",
+      "specs": [
+        "search.spec.ts"
+      ]
+    },
+    {
+      "name": "watchlist",
+      "label": "Watchlist",
+      "specs": [
+        "watchlist-management.spec.ts"
+      ]
+    },
+    {
+      "name": "end-to-end",
+      "label": "End to End",
+      "specs": [
+        "end-to-end.spec.ts"
+      ]
+    },
+    {
+      "name": "region",
+      "label": "Region",
+      "specs": [
+        "ph_region.spec.ts"
+      ]
+    },
+    {
+      "name": "Ads",
+      "label": "Ads",
+      "specs": [
+        "ads.spec.ts"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "value": "@High",
+      "label": "High priority"
+    },
+    {
+      "value": "@Medium",
+      "label": "Medium priority"
+    },
+    {
+      "value": "@Low",
+      "label": "Low priority"
+    }
+  ]
+}
