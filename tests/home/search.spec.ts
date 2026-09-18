@@ -107,4 +107,15 @@ test.describe('Search navigation', () => {
     expect(result.playerVisible).toBe(true);
     expect(result.playbackStarted).toBe(true);
   });
+
+  test('@Medium NEW-4 - Verify search results are returned regardless of query letter casing', async ({ page }) => {
+    const data = testCaseData['tc-nav-009-search-case-insensitive'];
+    const result = await verifySearchResults(page, {
+      mode: data.mode,
+      query: data.query,
+    });
+    expect(result.isLoggedIn).toBe(true);
+    expect(result.queryTyped).toBe(true);
+    expect(result.resultsVisible).toBe(true);
+  });
 })

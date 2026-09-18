@@ -262,6 +262,10 @@
         "mode": "valid",
         "query": "Abandoned"
     },
+    "tc-nav-009-search-case-insensitive": {
+        "mode": "valid",
+        "query": "abandoned"
+    },
     "tc-nav-004-watchlist-hover": {
         "mode": "valid",
         "query": "Abandoned"
