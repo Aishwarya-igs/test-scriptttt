@@ -291,6 +291,12 @@
         "mode": "valid",
         "query": "My Illegal Wife"
     },
+    "tc-auth-018-invalid-credentials-alt": {
+        "mode": "invalid",
+        "email": "wronguser99@gmail.com",
+        "password": "NotMyPassword1!",
+        "expectedErrorMessage": "Your login credentials are incorrect"
+    },
     "tc-nav-004-watchlist-hover": {
         "mode": "valid",
         "query": "Abandoned"

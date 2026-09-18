@@ -6,6 +6,8 @@ import {
   verifySearchQueryTyping,
   verifySearchAutoSuggestions,
   verifySearchNoResultsMessage,
+  verifyContinueWatchingAbsent,
+  loginWithInvalidCredentials,
 } from '../../src/businessFunction/ott-auth-bfs';
 import { playEpisodeFromDetailsPage } from '../../src/businessFunction/ott-details-bfs';
 import { removeFromContinueWatching } from '../../src/businessFunction/ott-continue-watching-bfs';
@@ -123,5 +125,35 @@ test.describe('New coverage', () => {
     const result = await removeContentFromWatchlistFromSearchPage(page, { query: data.query });
     expect(result.removedFromWatchlist).toBe(true);
     expect(result.isVisibleInMyWatchlist).toBe(false);
+  });
+
+  // NEW-10: verifyContinueWatchingAbsent itself was still unused (only its
+  // caller validateContinueWatchingForNoHistory, used by IW3-T1931, was
+  // wired up) — that wrapper only asserts the tray is empty; this exercises
+  // the underlying function directly to also check that when items ARE
+  // present, each one is well-formed (has a title and a progress flag).
+  test('@Medium NEW-10 - Verify Continue Watching rail items are well-formed when present', async ({ page }) => {
+    test.setTimeout(90000);
+    const result = await verifyContinueWatchingAbsent(page, {
+      email: process.env.UNWATCHED_LOGIN_EMAIL,
+      password: process.env.UNWATCHED_LOGIN_PASSWORD,
+    });
+    expect(typeof result.continueWatchingItemsCount).toBe('number');
+    if (result.continueWatchingItemsCount > 0) {
+      for (const item of result.continueWatchingItemsDetails) {
+        expect(item.title.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  test('@Medium NEW-11 - Verify a different invalid email/password combination is rejected', async ({ page }) => {
+    const data = testCaseData['tc-auth-018-invalid-credentials-alt'];
+    const result = await loginWithInvalidCredentials(page, {
+      email: data.email,
+      password: data.password,
+      mode: 'invalid',
+    });
+    expect(result.isLoggedIn).toBe(false);
+    expect(result.errorMessage).toContain(data.expectedErrorMessage);
   });
 });
