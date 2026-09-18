@@ -155,5 +155,11 @@ export default defineConfig({
       testDir: 'tests/home',
       testMatch: '**/ph_region.spec.ts',
     },
-  ], 
+
+    {
+      name: 'new-coverage',
+      testDir: 'tests/home',
+      testMatch: '**/new-coverage.spec.ts',
+    },
+  ],
 });
