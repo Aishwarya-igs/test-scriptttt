@@ -1,7 +1,18 @@
 import { test, expect } from '../../src/fixtures/test-hooks'
-import { loginToOTT, enterCreateAccountCredentials } from '../../src/businessFunction/ott-auth-bfs';
+import {
+  loginToOTT,
+  enterCreateAccountCredentials,
+  verifySearchResults,
+  verifySearchQueryTyping,
+  verifySearchAutoSuggestions,
+  verifySearchNoResultsMessage,
+} from '../../src/businessFunction/ott-auth-bfs';
 import { playEpisodeFromDetailsPage } from '../../src/businessFunction/ott-details-bfs';
 import { removeFromContinueWatching } from '../../src/businessFunction/ott-continue-watching-bfs';
+import {
+  addContentToWatchlistFromSearchPage,
+  removeContentFromWatchlistFromSearchPage,
+} from '../../src/businessFunction/ott-watchlist-bfs';
 import testCaseData from '../../src/data/ott-test-cases.json';
 
 // New coverage: wires up three business functions that already existed in
@@ -59,5 +70,58 @@ test.describe('New coverage', () => {
     expect(result.isPasswordFieldVisible).toBe(true);
     expect(result.emailFieldValue).toBe(data.email);
     expect(result.passwordFieldValue).toBe(data.password);
+  });
+
+  // NEW-4 through NEW-9: the framework's business functions are now fully
+  // wired up (see NEW-1/2/3 above), so these six exercise the same
+  // already-proven search/watchlist functions from search.spec.ts against a
+  // different title/query each — real catalog-breadth coverage rather than
+  // one hardcoded title, same pattern as the search project's 9th test.
+  test('@Medium NEW-4 - Verify search results for a different valid title', async ({ page }) => {
+    const data = testCaseData['tc-nav-010-search-results-alt-title'];
+    const result = await verifySearchResults(page, { mode: data.mode, query: data.query });
+    expect(result.isLoggedIn).toBe(true);
+    expect(result.queryTyped).toBe(true);
+    expect(result.resultsVisible).toBe(true);
+  });
+
+  test('@Medium NEW-5 - Verify typing a different search query in the input box', async ({ page }) => {
+    const data = testCaseData['tc-nav-011-search-query-typing-alt-title'];
+    const result = await verifySearchQueryTyping(page, { mode: data.mode, query: data.query });
+    expect(result.isLoggedIn).toBe(true);
+    expect(result.queryTyped).toBe(true);
+    expect(result.searchInputValue).toContain(data.query);
+  });
+
+  test('@Medium NEW-6 - Verify auto-suggestions for a different partial query', async ({ page }) => {
+    const data = testCaseData['tc-nav-012-search-auto-suggestions-alt-title'];
+    const result = await verifySearchAutoSuggestions(page, { mode: data.mode, query: data.query });
+    expect(result.isLoggedIn).toBe(true);
+    expect(result.suggestionsVisible).toBe(true);
+    expect(result.suggestionsCount).toBeGreaterThan(0);
+  });
+
+  test('@Medium NEW-7 - Verify no-results message for a different nonsense query', async ({ page }) => {
+    const data = testCaseData['tc-nav-013-search-no-results-alt-query'];
+    const result = await verifySearchNoResultsMessage(page, { mode: data.mode, searchQuery: data.searchQuery });
+    expect(result.isLoggedIn).toBe(true);
+    expect(result.noResultsMessageVisible).toBe(true);
+    expect(result.messageText).toContain(data.expectedNoResultsMessage);
+  });
+
+  test('@Medium NEW-8 - Verify adding a different title to My Watchlist from search', async ({ page }) => {
+    test.setTimeout(100000);
+    const data = testCaseData['tc-nav-014-watchlist-add-alt-title'];
+    const result = await addContentToWatchlistFromSearchPage(page, { query: data.query });
+    expect(result.addedToWatchlist).toBe(true);
+    expect(result.isVisibleInMyWatchlist).toBe(true);
+  });
+
+  test('@Medium NEW-9 - Verify removing a different title from My Watchlist from search', async ({ page }) => {
+    test.setTimeout(100000);
+    const data = testCaseData['tc-nav-015-watchlist-remove-alt-title'];
+    const result = await removeContentFromWatchlistFromSearchPage(page, { query: data.query });
+    expect(result.removedFromWatchlist).toBe(true);
+    expect(result.isVisibleInMyWatchlist).toBe(false);
   });
 });

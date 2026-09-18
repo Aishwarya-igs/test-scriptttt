@@ -266,6 +266,31 @@
         "mode": "valid",
         "query": "abandoned"
     },
+    "tc-nav-010-search-results-alt-title": {
+        "mode": "valid",
+        "query": "Lavender Fields"
+    },
+    "tc-nav-011-search-query-typing-alt-title": {
+        "mode": "valid",
+        "query": "Incognito"
+    },
+    "tc-nav-012-search-auto-suggestions-alt-title": {
+        "mode": "valid",
+        "query": "Karnal"
+    },
+    "tc-nav-013-search-no-results-alt-query": {
+        "mode": "valid",
+        "searchQuery": "qwzxcvbnmqwerty12345nonexistent",
+        "expectedNoResultsMessage": "No results found."
+    },
+    "tc-nav-014-watchlist-add-alt-title": {
+        "mode": "valid",
+        "query": "Nurse The Dead"
+    },
+    "tc-nav-015-watchlist-remove-alt-title": {
+        "mode": "valid",
+        "query": "My Illegal Wife"
+    },
     "tc-nav-004-watchlist-hover": {
         "mode": "valid",
         "query": "Abandoned"
