@@ -11,7 +11,11 @@ import testCaseData from '../../src/data/ott-test-cases.json';
 // loginToOTT first, then call the target business function on the same page.
 test.describe('New coverage', () => {
   test('@High NEW-1 - Play episode from show details page', async ({ page }) => {
-    const data = testCaseData['tc-disc-004-skip-intro'];
+    test.setTimeout(120000);
+    // getPlaybackEpisodeTitleText() in OTTDetailsPage.ts has a locator
+    // hardcoded to "The Blood Sisters" episode text, so that's the only
+    // title this flow can verify against — matches tc-disc-002's own intent.
+    const data = testCaseData['tc-disc-002-episode-playback'];
     const loginResult = await loginToOTT(page, { mode: data.mode });
     expect(loginResult.isLoggedIn).toBe(true);
 
@@ -27,13 +31,15 @@ test.describe('New coverage', () => {
   });
 
   test('@High NEW-2 - Remove an item from the Continue Watching tray', async ({ page }) => {
-    const data = testCaseData['tc-disc-004-skip-intro'];
+    test.setTimeout(120000);
+    const data = testCaseData['tc-disc-003-remove-continue-watching'];
     const loginResult = await loginToOTT(page, { mode: data.mode });
     expect(loginResult.isLoggedIn).toBe(true);
 
     const result = await removeFromContinueWatching(page, {
       mode: data.mode,
       searchTerm: data.searchTerm,
+      contentTitle: data.contentTitle,
     });
 
     expect(result.isContinueWatchingTrayVisible).toBe(true);
